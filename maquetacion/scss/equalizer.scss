@@ -1,3 +1,6 @@
+$equalizer-black: #000;
+$equalizer-grey: #999;
+
 * {
   box-sizing: border-box;
   font-family: sans-serif;
@@ -19,33 +22,21 @@ a,
 button,
 select,
 textarea {
-  color: #000;
+  color: $equalizer-black;
   display: inline-block;
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
   margin: 0;
-}
-h1:focus,
-h2:focus,
-h3:focus,
-h4:focus,
-h5:focus,
-h6:focus,
-p:focus,
-span:focus,
-label:focus,
-input:focus,
-a:focus,
-button:focus,
-select:focus,
-textarea:focus {
-  outline: none;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 select {
-  -moz-appearance: none;
-  -webkit-appearance: none;
+ -moz-appearance: none;
+ -webkit-appearance: none;
 }
 
 table {
@@ -79,10 +70,13 @@ button::-moz-focus-inner {
 a {
   cursor: pointer;
   text-decoration: none;
-}
-a:focus, a:active, a:hover {
-  color: #000;
-  text-decoration: none;
+
+  &:focus,
+  &:active,
+  &:hover {
+    color: $equalizer-black;
+    text-decoration: none;
+  }
 }
 
 ul,
@@ -93,12 +87,6 @@ li {
 }
 
 ::placeholder {
-  color: #999;
+  color: $equalizer-grey;
   opacity: 1;
 }
-
-.title {
-  color: red;
-}
-
-/*# sourceMappingURL=application.css.map */
