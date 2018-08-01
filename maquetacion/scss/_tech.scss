@@ -1,0 +1,47 @@
+@import 'variables';
+@import 'colors';
+
+.content-cards {
+  margin-bottom: #{$text-medium * 2};
+  padding: $text-medium #{$text-medium * 2};
+}
+
+.card {
+  background-color: $green;
+  border-radius: $card-border-radius;
+  max-width: 100%;
+  padding: $text-medium;
+  position: relative;
+  width: $card-width;
+
+  &:before {
+    content: '';
+    border: 2px solid $green;
+    border-radius: $card-border-radius;
+    height: 100%;
+    left: -#{$text-small};
+    position: absolute;
+    top: -#{$text-small};
+    width: 100%;
+    z-index: -1;
+  }
+
+  @at-root #{&}-image {
+    display: block;
+    margin: 0 auto $text-medium;
+    width: $tech-logo-size;
+  }
+
+  @at-root #{&}-title {
+    display: block;
+    font-size: $text-medium;
+    margin-bottom: #{$text-medium / 2};
+    text-align: center;
+  }
+
+  @at-root #{&}-content {
+    margin-bottom: $text-medium;
+    margin-top: #{$text-medium / 2};
+    text-align: center;
+  }
+}
