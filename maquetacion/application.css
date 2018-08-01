@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 * {
   box-sizing: border-box;
   font-family: sans-serif;
@@ -97,8 +98,28 @@ li {
   opacity: 1;
 }
 
-.title {
-  color: red;
+body {
+  font-family: "Roboto", sans-serif;
 }
 
-/*# sourceMappingURL=application.css.map */
+.content {
+  margin: 0 auto;
+  max-width: 100%;
+  width: 900px;
+}
+
+.title {
+  align-items: center;
+  display: flex;
+  font-size: 24px;
+  height: 90px;
+  margin-bottom: 16px;
+  padding-left: 52px;
+  position: relative;
+}
+.title-image {
+  left: 0;
+  position: absolute;
+  width: 70px;
+  z-index: -1;
+}

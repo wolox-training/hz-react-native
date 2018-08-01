@@ -1,0 +1,18 @@
+@import 'variables';
+
+.title {
+  align-items: center;
+  display: flex;
+  font-size: $text-big;
+  height: $title-decoration-height;
+  margin-bottom: $text-medium;
+  padding-left: 52px;
+  position: relative;
+
+  @at-root #{&}-image {
+    left: 0;
+    position: absolute;
+    width: $title-decoration-width;
+    z-index: -1;
+  }
+}
