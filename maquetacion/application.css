@@ -105,7 +105,8 @@ body {
 .content {
   margin: 0 auto;
   max-width: 100%;
-  width: 900px;
+  padding: 32px 0;
+  width: 1000px;
 }
 
 .fw-bold {
@@ -117,7 +118,7 @@ body {
   display: flex;
   font-size: 24px;
   height: 90px;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
   padding-left: 52px;
   position: relative;
 }
@@ -129,6 +130,8 @@ body {
 }
 
 .content-cards {
+  display: flex;
+  flex-wrap: wrap;
   margin-bottom: 32px;
   padding: 16px 32px;
 }
@@ -136,8 +139,10 @@ body {
 .card {
   background-color: #BED23C;
   border-radius: 4px;
+  margin-bottom: 32px;
+  margin-right: 32px;
   max-width: 100%;
-  padding: 16px;
+  padding: 16px 12px;
   position: relative;
   width: 200px;
 }
@@ -154,6 +159,7 @@ body {
 }
 .card-image {
   display: block;
+  height: 100px;
   margin: 0 auto 16px;
   width: 100px;
 }

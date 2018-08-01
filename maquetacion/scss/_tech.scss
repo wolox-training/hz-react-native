@@ -2,6 +2,8 @@
 @import 'colors';
 
 .content-cards {
+  display: flex;
+  flex-wrap: wrap;
   margin-bottom: #{$text-medium * 2};
   padding: $text-medium #{$text-medium * 2};
 }
@@ -9,8 +11,10 @@
 .card {
   background-color: $green;
   border-radius: $card-border-radius;
+  margin-bottom: #{$text-medium * 2};
+  margin-right: #{$text-medium * 2};
   max-width: 100%;
-  padding: $text-medium;
+  padding: $text-medium $text-small;
   position: relative;
   width: $card-width;
 
@@ -28,6 +32,7 @@
 
   @at-root #{&}-image {
     display: block;
+    height: $tech-logo-size;
     margin: 0 auto $text-medium;
     width: $tech-logo-size;
   }
