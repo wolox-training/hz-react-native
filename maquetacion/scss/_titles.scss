@@ -12,7 +12,7 @@
   &::before {
     background-image: url(assets/triangle.svg);
     background-repeat: no-repeat;
-    content: "";
+    content: '';
     left: 0;
     position: absolute;
     width: $title-decoration-width;
