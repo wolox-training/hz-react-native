@@ -151,11 +151,16 @@ body {
   border: 2px solid #BED23C;
   border-radius: 4px;
   height: 100%;
-  left: -12px;
+  left: 0;
   position: absolute;
-  top: -12px;
+  top: 0;
+  transform: translate(-10px, -10px);
+  transition: transform 270ms ease-in;
   width: 100%;
   z-index: -1;
+}
+.card:hover:before {
+  transform: translate(6px, 6px);
 }
 .card-image {
   display: block;
