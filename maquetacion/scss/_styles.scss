@@ -7,6 +7,6 @@ body {
 .content {
   margin: 0 auto;
   max-width: 100%;
-  padding: #{$text-medium * 2} 0;
+  padding: #{$text-medium * 9} 0 #{$text-medium * 2};
   width: $size-content;
 }
