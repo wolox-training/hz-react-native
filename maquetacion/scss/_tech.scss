@@ -7,8 +7,11 @@
 }
 
 .card {
+  align-items: center;
   background-color: $green;
   border-radius: $card-border-radius;
+  display: flex;
+  flex-direction: column;
   max-width: 100%;
   padding: $text-medium;
   position: relative;
@@ -25,23 +28,27 @@
     width: 100%;
     z-index: -1;
   }
+}
 
-  @at-root #{&}-image {
-    display: block;
-    margin: 0 auto $text-medium;
-    width: $tech-logo-size;
-  }
+.card-image {
+  width: $tech-logo-size;
+}
 
-  @at-root #{&}-title {
-    display: block;
-    font-size: $text-medium;
-    margin-bottom: #{$text-medium / 2};
-    text-align: center;
-  }
+.card-title {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: $text-medium;
+  margin-bottom: $text-medium;
+  margin-top: $text-medium;
+}
 
-  @at-root #{&}-content {
-    margin-bottom: $text-medium;
-    margin-top: #{$text-medium / 2};
-    text-align: center;
-  }
+.card-title-info {
+  font-weight: bold;
+  margin-top: #{$text-medium / 2};
+}
+
+.card-content {
+  margin-bottom: $text-medium;
+  text-align: center;
 }
