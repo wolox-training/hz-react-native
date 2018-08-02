@@ -1,0 +1,22 @@
+@import 'variables';
+
+.title {
+  align-items: center;
+  display: flex;
+  font-size: $text-big;
+  height: $title-decoration-height;
+  margin-bottom: $text-medium;
+  padding-left: #{$title-decoration-width - 18};
+  position: relative;
+
+  &::before {
+    background-image: url(assets/triangle.svg);
+    background-repeat: no-repeat;
+    content: '';
+    left: 0;
+    position: absolute;
+    width: $title-decoration-width;
+    height: $title-decoration-height;
+    z-index: -1;
+  }
+}
