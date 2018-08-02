@@ -5,14 +5,18 @@
   display: flex;
   font-size: $text-big;
   height: $title-decoration-height;
-  margin-bottom: #{$text-medium * 2};
-  padding-left: 52px;
+  margin-bottom: $text-medium;
+  padding-left: #{$title-decoration-width - 18};
   position: relative;
 
-  @at-root #{&}-image {
+  &::before {
+    background-image: url(assets/triangle.svg);
+    background-repeat: no-repeat;
+    content: '';
     left: 0;
     position: absolute;
     width: $title-decoration-width;
+    height: $title-decoration-height;
     z-index: -1;
   }
 }

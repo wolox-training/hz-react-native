@@ -5,12 +5,15 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: #{$text-medium * 2};
-  padding: $text-medium #{$text-medium * 2};
+  padding: $text-medium #{$text-medium * 2} $text-medium #{$text-medium * 4};
 }
 
 .card {
+  align-items: center;
   background-color: $green;
   border-radius: $card-border-radius;
+  display: flex;
+  flex-direction: column;
   margin-bottom: #{$text-medium * 2};
   margin-right: #{$text-medium * 2};
   max-width: 100%;
@@ -18,7 +21,7 @@
   position: relative;
   width: $card-width;
 
-  &:before {
+  &::before {
     content: '';
     border: 2px solid $green;
     border-radius: $card-border-radius;
@@ -32,27 +35,31 @@
     z-index: -1;
   }
 
-  &:hover:before {
+  &:hover::before {
     transform: translate(#{$text-small / 2}, #{$text-small / 2});
   }
+}
 
-  @at-root #{&}-image {
-    display: block;
-    height: $tech-logo-size;
-    margin: 0 auto $text-medium;
-    width: $tech-logo-size;
-  }
+.card-image {
+  height: $tech-logo-size;
+  width: $tech-logo-size;
+}
 
-  @at-root #{&}-title {
-    display: block;
-    font-size: $text-medium;
-    margin-bottom: #{$text-medium / 2};
-    text-align: center;
-  }
+.card-title {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: $text-medium;
+  margin-bottom: $text-medium;
+  margin-top: $text-medium;
+}
 
-  @at-root #{&}-content {
-    margin-bottom: $text-medium;
-    margin-top: #{$text-medium / 2};
-    text-align: center;
-  }
+.card-title-info {
+  font-weight: bold;
+  margin-top: #{$text-medium / 2};
+}
+
+.card-content {
+  margin-bottom: $text-medium;
+  text-align: center;
 }

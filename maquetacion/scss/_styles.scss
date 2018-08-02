@@ -1,16 +1,12 @@
 @import 'variables';
 
 body {
-	font-family: $font;
+  font-family: $font;
 }
 
 .content {
-	margin: 0 auto;
-	max-width: 100%;
-	padding: #{$text-medium * 2} 0;
-	width: $size-content;
-}
-
-.fw-bold {
-	font-weight: bold;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: #{$text-medium * 2} 0;
+  width: $size-content;
 }
