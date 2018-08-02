@@ -14,7 +14,7 @@
   position: relative;
   width: $card-width;
 
-  &:before {
+  &::before {
     content: '';
     border: 2px solid $green;
     border-radius: $card-border-radius;
