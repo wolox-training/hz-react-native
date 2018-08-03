@@ -10,3 +10,9 @@ body {
   padding: 144px 0 0;
   width: $size-content;
 }
+
+@media only screen and (max-width: 1024px) {
+  .content {
+    padding-left: 32px;
+  }
+}

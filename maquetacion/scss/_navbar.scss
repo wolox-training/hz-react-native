@@ -21,3 +21,9 @@
 .nav-title {
   font-size: $text-big;
 }
+
+@media only screen and (max-width: 1024px) {
+  .nav-title {
+    display: none;
+  }
+}
