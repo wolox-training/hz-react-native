@@ -2,8 +2,10 @@
 @import 'colors';
 
 .content-cards {
-  margin-bottom: #{$text-medium * 2};
-  padding: $text-medium #{$text-medium * 2};
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  padding: $text-medium 32px $text-medium 64px;
 }
 
 .card {
@@ -12,8 +14,10 @@
   border-radius: $card-border-radius;
   display: flex;
   flex-direction: column;
+  margin-bottom: 32px;
+  margin-right: 32px;
   max-width: 100%;
-  padding: $text-medium;
+  padding: $text-medium $text-small;
   position: relative;
   width: $card-width;
 
@@ -31,6 +35,7 @@
 }
 
 .card-image {
+  height: $tech-logo-size;
   width: $tech-logo-size;
 }
 
@@ -45,7 +50,7 @@
 
 .card-title-info {
   font-weight: bold;
-  margin-top: #{$text-medium / 2};
+  margin-top: 8px;
 }
 
 .card-content {
