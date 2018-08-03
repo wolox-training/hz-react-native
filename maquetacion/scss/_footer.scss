@@ -1,0 +1,32 @@
+@import 'variables';
+@import 'colors';
+
+.footer {
+  background-color: $blue;
+  display: flex;
+  flex-direction: column;
+  height: $footer-height;
+  justify-content: center;
+  padding: $text-medium $text-big;
+}
+
+.footer-content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  justify-content: center;
+}
+
+.footer-title {
+  color: $white;
+  font-size: $text-big;
+  margin-bottom: $text-small;
+  text-transform: uppercase;
+}
+
+.footer-copyright {
+  align-self: flex-end;
+  color: $white;
+  font-size: $text-small;
+}
