@@ -4,8 +4,8 @@
 .content-cards {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: #{$text-medium * 2};
-  padding: $text-medium #{$text-medium * 2} $text-medium #{$text-medium * 4};
+  margin-bottom: 32px;
+  padding: $text-medium 32px $text-medium 64px;
 }
 
 .card {
@@ -14,8 +14,8 @@
   border-radius: $card-border-radius;
   display: flex;
   flex-direction: column;
-  margin-bottom: #{$text-medium * 2};
-  margin-right: #{$text-medium * 2};
+  margin-bottom: 32px;
+  margin-right: 32px;
   max-width: 100%;
   padding: $text-medium $text-small;
   position: relative;
@@ -56,7 +56,7 @@
 
 .card-title-info {
   font-weight: bold;
-  margin-top: #{$text-medium / 2};
+  margin-top: 8px;
 }
 
 .card-content {
