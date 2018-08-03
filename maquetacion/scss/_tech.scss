@@ -29,14 +29,14 @@
     left: 0;
     position: absolute;
     top: 0;
-    transform: translate(-#{$text-small - 2}, -#{$text-small - 2});
+    transform: translate(-10px, -10px);
     transition: transform $transition-duration $transition-function;
     width: 100%;
     z-index: -1;
   }
 
   &:hover::before {
-    transform: translate(#{$text-small / 2}, #{$text-small / 2});
+    transform: translate(6px, 6px);
   }
 }
 
