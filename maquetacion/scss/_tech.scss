@@ -2,41 +2,29 @@
 @import 'colors';
 
 .content-cards {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 32px;
-  padding: $text-medium 32px $text-medium 64px;
+  display: grid;
+  grid-column-gap: $text-medium;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  margin: 0 auto 32px;
+  padding: $text-medium;
+  width: fit-content;
 }
 
 .card {
   align-items: center;
-  background-color: $green;
-  border-radius: $card-border-radius;
   display: flex;
   flex-direction: column;
-  margin-bottom: 32px;
-  margin-right: 32px;
   max-width: 100%;
   padding: $text-medium $text-small;
-  position: relative;
   width: $card-width;
 
-  &::before {
-    content: '';
-    border: 2px solid $green;
-    border-radius: $card-border-radius;
+  &:first-child {
+    align-self: center;
+    border-right: 2px solid $green;
+    grid-row: span 2;
     height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    transform: translate(-10px, -10px);
-    transition: transform $transition-duration $transition-function;
-    width: 100%;
-    z-index: -1;
-  }
-
-  &:hover::before {
-    transform: translate(6px, 6px);
+    justify-content: center;
   }
 }
 
