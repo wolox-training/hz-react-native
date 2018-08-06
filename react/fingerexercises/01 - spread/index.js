@@ -1,10 +1,7 @@
 import isArray from './utils';
 
-export function min(param) {
-  if (isArray(param)) {
-    return Math.min(...param);
-  }
-  return param;
+export function min(...params) {
+  return isArray(params[0]) ? Math.min(...params[0]) : Math.min(...params);
 }
 
 export function copy() {

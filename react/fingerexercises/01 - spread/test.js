@@ -10,7 +10,7 @@ describe('Spread operator', () => {
     expect(min([2, 1])).toBe(1);
     expect(min([23, 10, 33, 7, 22])).toBe(7);
   });
-  xit('min can return the minimum based on many parameters', () => {
+  it('min can return the minimum based on many parameters', () => {
     expect(min(1, 2, 3, 4, 5, 0)).toBe(0);
     expect(min(1, 2, 3, 4, -1, 0)).toBe(-1);
   });
