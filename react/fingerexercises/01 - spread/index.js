@@ -7,5 +7,8 @@ export function min(...params) {
 }
 
 export function copy(param) {
+  if (isArray(param)) {
+    return [...param];
+  }
   return { ...param };
 }
