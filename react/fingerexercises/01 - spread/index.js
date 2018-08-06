@@ -6,6 +6,6 @@ export function min(...params) {
   return undefined;
 }
 
-export function copy() {
-
+export function copy(param) {
+  return { ...param };
 }
