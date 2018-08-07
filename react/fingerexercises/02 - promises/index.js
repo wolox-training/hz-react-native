@@ -1,4 +1,4 @@
-// Hint: use setInterval, create a new Promise and measure time with Date.now()
+// Hint: use setTimeout, create a new Promise and measure time with Date.now()
 
 export function delay(time) {
   const start = Date.now();
@@ -10,6 +10,6 @@ export function delay(time) {
   });
 }
 
-export function asyncDelay() {
-
+export function asyncDelay(time) {
+  return delay(time);
 }
