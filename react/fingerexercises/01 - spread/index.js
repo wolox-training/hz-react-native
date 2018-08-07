@@ -19,4 +19,7 @@ export function reverseMerge(...params) {
   return params[0];
 }
 
-export function filterAttribs() {}
+export function filterAttribs(param) {
+  const { a, b, ...x } = param;
+  return x;
+}
