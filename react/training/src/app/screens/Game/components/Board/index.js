@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import Square from '../Square';
 
 import style from './styles.scss';
 
 export default class Board extends Component {
-  renderSquare = () => <Square />;
+  renderSquare = i => <Square value={i} />;
 
   render() {
     const status = 'Next player: X';
 
     return (
-      <div>
+      <Fragment>
         <div className={style.status}>{status}</div>
         <div className={style.boardRow}>
           {this.renderSquare(0)}
@@ -28,7 +28,7 @@ export default class Board extends Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
