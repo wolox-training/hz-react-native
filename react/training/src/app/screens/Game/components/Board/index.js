@@ -6,12 +6,19 @@ import Square from '../Square';
 import style from './styles.scss';
 
 export default class Board extends Component {
-  renderSquare = i => <Square value={this.props.squares[i]} onClick={() => this.props.onClick(i)} />;
+  renderSquare = i => {
+    let highlight = false;
+    if (this.props.winner) {
+      highlight = this.props.winner.position.find(index => index === i) !== undefined;
+    }
+    return (
+      <Square value={this.props.squares[i]} highlight={highlight} onClick={() => this.props.onClick(i)} />
+    );
+  };
 
   render() {
     return (
       <Fragment>
-        <div className={style.status}>{status}</div>
         <div className={style.boardRow}>
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -34,5 +41,6 @@ export default class Board extends Component {
 
 Board.propTypes = {
   squares: PropTypes.arrayOf(PropTypes.string),
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  winner: PropTypes.objectOf(PropTypes.any)
 };

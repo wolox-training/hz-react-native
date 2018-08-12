@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import Board from './components/Board';
 import style from './styles.scss';
@@ -8,7 +8,7 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i += 1) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return { player: squares[a], position: [a, b, c] };
     }
   }
   return null;
@@ -50,28 +50,33 @@ export default class Game extends Component {
     const moves = history.map((step, move) => {
       const desc = move ? `Go to move #${move}` : 'Go to game start';
       return (
-        <li key={`autoKey-${move + 1}`}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
-        </li>
+        <button className={style.buttonHistory} key={`autoKey-${move + 1}`} onClick={() => this.jumpTo(move)}>
+          {desc}
+        </button>
       );
     });
     let status;
     if (winner) {
-      status = `Winner: ${winner}`;
+      status = `Winner: ${winner.player}`;
+    } else if (this.state.stepNumber === current.squares.length) {
+      status = `Nobody wins`;
     } else {
       status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
     }
 
     return (
-      <div className={style.game}>
-        <div className={style.gameBoard}>
-          <Board squares={current.squares} onClick={i => this.handleClick(i)} />
+      <Fragment>
+        <h1 className={style.title}>tic tac toe</h1>
+        <div className={style.game}>
+          <div className={style.gameBoard}>
+            <Board squares={current.squares} winner={winner} onClick={i => this.handleClick(i)} />
+          </div>
+          <div className={style.gameInfo}>
+            <h2 className={style.status}>{status}</h2>
+            <div className={style.listButtonsHistory}>{moves}</div>
+          </div>
         </div>
-        <div className={style.gameInfo}>
-          <div>{status}</div>
-          <ol>{moves}</ol>
-        </div>
-      </div>
+      </Fragment>
     );
   }
 }
