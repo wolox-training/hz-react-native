@@ -3,13 +3,9 @@ import PropTypes from 'prop-types';
 
 import style from './styles.scss';
 
-export default function Square(props) {
-  const classes = [style.square];
-  if (props.highlight) {
-    classes.push(style.highlight);
-  }
+function Square(props) {
   return (
-    <button className={classes.join(' ')} onClick={props.onClick}>
+    <button className={`${style.square} ${props.highlight && style.highlight}`} onClick={props.onClick}>
       {props.value}
     </button>
   );
@@ -20,3 +16,5 @@ Square.propTypes = {
   highlight: PropTypes.bool,
   onClick: PropTypes.func.isRequired
 };
+
+export default Square;

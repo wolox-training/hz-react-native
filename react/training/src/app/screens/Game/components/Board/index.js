@@ -5,7 +5,7 @@ import Square from '../Square';
 
 import style from './styles.scss';
 
-export default class Board extends Component {
+class Board extends Component {
   renderSquare = i => {
     let highlight = false;
     if (this.props.winner) {
@@ -42,5 +42,10 @@ export default class Board extends Component {
 Board.propTypes = {
   squares: PropTypes.arrayOf(PropTypes.string),
   onClick: PropTypes.func.isRequired,
-  winner: PropTypes.objectOf(PropTypes.any)
+  winner: PropTypes.shape({
+    player: PropTypes.string.isRequired,
+    position: PropTypes.arrayOf(PropTypes.number).isRequired
+  })
 };
+
+export default Board;

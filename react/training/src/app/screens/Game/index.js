@@ -1,31 +1,54 @@
 import React, { Component, Fragment } from 'react';
 
 import Board from './components/Board';
+import Button from './components/Button';
 import style from './styles.scss';
 
-function calculateWinner(squares) {
-  const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
-  for (let i = 0; i < lines.length; i += 1) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return { player: squares[a], position: [a, b, c] };
-    }
-  }
-  return null;
-}
-
-export default class Game extends Component {
+class Game extends Component {
   state = {
     history: [{ squares: Array(9).fill(null) }],
     stepNumber: 0,
     xIsNext: true
   };
 
+  getConst = () => {
+    const history = this.state.history;
+    const current = history[this.state.stepNumber];
+    const winner = this.calculateWinner(current.squares);
+    const moves = history.map((step, move) => {
+      const desc = move ? `Go to move #${move}` : 'Go to game start';
+      return (
+        <Button
+          key={`autoKey-${move + 1}`}
+          className={style.buttonHistory}
+          clickParam={move}
+          onClick={this.jumpTo}
+        >
+          {desc}
+        </Button>
+      );
+    });
+    return { current, winner, moves };
+  };
+
+  getStatus = squares => {
+    const winner = this.calculateWinner(squares);
+    let status;
+    if (winner) {
+      status = `Winner: ${winner.player}`;
+    } else if (this.state.stepNumber === squares.length) {
+      status = `Nobody wins`;
+    } else {
+      status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
+    }
+    return status;
+  };
+
   handleClick = i => {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    if (calculateWinner(squares) || squares[i]) {
+    if (this.calculateWinner(squares) || squares[i]) {
       return;
     }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
@@ -36,43 +59,36 @@ export default class Game extends Component {
     });
   };
 
-  jumpTo(step) {
+  calculateWinner = squares => {
+    const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+    for (let i = 0; i < lines.length; i += 1) {
+      const [a, b, c] = lines[i];
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        return { player: squares[a], position: [a, b, c] };
+      }
+    }
+    return null;
+  };
+
+  jumpTo = step => {
     this.setState({
       stepNumber: step,
       xIsNext: step % 2 === 0
     });
-  }
+  };
 
   render() {
-    const history = this.state.history;
-    const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
-    const moves = history.map((step, move) => {
-      const desc = move ? `Go to move #${move}` : 'Go to game start';
-      return (
-        <button className={style.buttonHistory} key={`autoKey-${move + 1}`} onClick={() => this.jumpTo(move)}>
-          {desc}
-        </button>
-      );
-    });
-    let status;
-    if (winner) {
-      status = `Winner: ${winner.player}`;
-    } else if (this.state.stepNumber === current.squares.length) {
-      status = `Nobody wins`;
-    } else {
-      status = `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
-    }
+    const { current, winner, moves } = this.getConst();
 
     return (
       <Fragment>
         <h1 className={style.title}>tic tac toe</h1>
         <div className={style.game}>
           <div className={style.gameBoard}>
-            <Board squares={current.squares} winner={winner} onClick={i => this.handleClick(i)} />
+            <Board squares={current.squares} winner={winner} onClick={this.handleClick} />
           </div>
           <div className={style.gameInfo}>
-            <h2 className={style.status}>{status}</h2>
+            <h2 className={style.status}>{this.getStatus(current.squares)}</h2>
             <div className={style.listButtonsHistory}>{moves}</div>
           </div>
         </div>
@@ -80,3 +96,5 @@ export default class Game extends Component {
     );
   }
 }
+
+export default Game;
