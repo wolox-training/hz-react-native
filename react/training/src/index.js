@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import RouteWrapper from '~components/RouteWrapper'; // eslint-disable-line import/first;
+
 import './scss/index.scss';
 import registerServiceWorker from './registerServiceWorker';
 
-import Game from '~screens/Game'; // eslint-disable-line import/first
-
-ReactDOM.render(<Game />, document.getElementById('root'));
+ReactDOM.render(<RouteWrapper />, document.getElementById('root'));
 registerServiceWorker();
