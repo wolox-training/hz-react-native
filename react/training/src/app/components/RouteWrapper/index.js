@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Login from '~screens/Login';
 
@@ -8,10 +8,10 @@ import Game from '~screens/Game';
 function RouteWrapper() {
   return (
     <Router>
-      <Fragment>
+      <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/game" component={Game} />
-      </Fragment>
+      </Switch>
     </Router>
   );
 }
