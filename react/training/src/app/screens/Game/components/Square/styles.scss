@@ -1,18 +1,33 @@
+@import 'variables/colors';
+
 .square {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
+  background-color: $white;
+  border: 1px solid $dusty-gray;
+  cursor: pointer;
+  font-size: 60px;
   font-weight: bold;
-  line-height: 34px;
-  height: 34px;
+  height: 70px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 70px;
+
+  &.highlight {
+    color: $red;
+    animation: scaleUp 1.5s cubic-bezier(0.39, 0.58, 0.57, 1) infinite;
+  }
 
   &:focus {
     outline: none;
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(.9);
+  }
+  to {
+    transform: scale(1);
   }
 }

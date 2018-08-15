@@ -1,18 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import Square from '../Square';
 
 import style from './styles.scss';
 
-export default class Board extends Component {
-  renderSquare = () => <Square />;
+class Board extends Component {
+  renderSquare = i => {
+    let highlight = false;
+    if (this.props.winner) {
+      highlight = this.props.winner.position.find(index => index === i) !== undefined;
+    }
+    return (
+      <Square value={this.props.squares[i]} highlight={highlight} onClick={() => this.props.onClick(i)} />
+    );
+  };
 
   render() {
-    const status = 'Next player: X';
-
     return (
-      <div>
-        <div className={style.status}>{status}</div>
+      <Fragment>
         <div className={style.boardRow}>
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -28,7 +34,18 @@ export default class Board extends Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
+
+Board.propTypes = {
+  squares: PropTypes.arrayOf(PropTypes.string),
+  onClick: PropTypes.func.isRequired,
+  winner: PropTypes.shape({
+    player: PropTypes.string.isRequired,
+    position: PropTypes.arrayOf(PropTypes.number).isRequired
+  })
+};
+
+export default Board;

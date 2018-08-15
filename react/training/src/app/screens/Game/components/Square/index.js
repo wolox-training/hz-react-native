@@ -1,9 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import style from './styles.scss';
 
-export default class Square extends Component {
-  render() {
-    return <button className={style.square}>{/* TODO */}</button>;
-  }
+function Square(props) {
+  return (
+    <button className={`${style.square} ${props.highlight && style.highlight}`} onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
 }
+
+Square.propTypes = {
+  value: PropTypes.string,
+  highlight: PropTypes.bool,
+  onClick: PropTypes.func.isRequired
+};
+
+export default Square;

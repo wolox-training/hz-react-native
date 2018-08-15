@@ -1,8 +1,49 @@
+@import 'variables/colors';
+@import 'variables/fontStyles';
+
+.title {
+  color: $black;
+  font-size: 60px;
+  margin-bottom: $font-size-base;
+  text-align: center;
+  text-transform: capitalize;
+  text-shadow: -1px 0 $white, 0 1px $white, 1px 0 $white, 0 -1px $white;
+}
+
 .game {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .game-info {
-  margin-left: 20px;
+  margin-left: 30px;
+}
+
+.status {
+  color: $white;
+  font-size: #{$font-size-base * 2};
+  margin-bottom: $font-size-base;
+}
+
+.list-buttons-history {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.button-history {
+  background-color: $white;
+  border-radius: .25rem;
+  cursor: pointer;
+  margin-bottom: .5rem;
+  padding: .4rem .8rem;
+  transition-duration: 270ms;
+  transition-property: background-color, box-shadow;
+
+  &:hover, &:focus, &:active {
+    background-color: darken($white, 25%);
+    box-shadow: inset 1px 1px 1px $black-shadow, inset -1px -1px 1px $black-shadow;
+    outline: none;
+  }
 }
