@@ -8,34 +8,36 @@ const privateActions = {
   assignLoading: loading => ({
     type: 'ASSIGN_LOADING',
     loading
+  }),
+  userAuth: user => ({
+    type: 'AUTH_USER',
+    auth: user
   })
 };
 
 const actionCreators = {
-  authUser: currentUser => dispatch => {
+  authUser: currentUser => async dispatch => {
     dispatch(privateActions.assignLoading(true));
-    AuthService.getUsers()
-      .then(response => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response.data;
-      })
-      .then(data => {
-        dispatch(privateActions.assignLoading(false));
-        const userExist = data.find(
-          user => user.email === currentUser.email && user.password === currentUser.password
-        );
-        if (userExist) {
-          localStorage.setItem('token', userExist.token);
-          AuthService.setToken(userExist.token);
-          dispatch(privateActions.requestHasError(false));
-          dispatch({ type: 'AUTH_USER', auth: true });
-        } else {
-          dispatch(privateActions.requestHasError(true));
-        }
-      })
-      .catch(() => dispatch(privateActions.requestHasError(true)));
+    const response = await AuthService.getUsers();
+    try {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+
+      dispatch(privateActions.assignLoading(false));
+      const userExist = response.data.find(
+        user => user.email === currentUser.email && user.password === currentUser.password
+      );
+      if (userExist) {
+        localStorage.setItem('token', userExist.token);
+        AuthService.setToken(userExist.token);
+        dispatch(privateActions.userAuth({ id: userExist.id, email: userExist.email }));
+      } else {
+        dispatch(privateActions.requestHasError(true));
+      }
+    } catch (error) {
+      dispatch(privateActions.requestHasError(true));
+    }
   }
 };
 

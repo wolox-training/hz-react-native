@@ -7,18 +7,6 @@ import authActions from '~redux/Auth/action';
 import Layout from './layout';
 
 class Login extends Component {
-  componentDidMount() {
-    if (localStorage.getItem('token')) {
-      this.props.history.push('/game');
-    }
-  }
-
-  componentDidUpdate() {
-    if (this.props.auth) {
-      this.props.history.push('/game');
-    }
-  }
-
   handleSubmit = async values => {
     this.props.authUser(values);
   };
@@ -33,17 +21,12 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  auth: PropTypes.bool,
   authUser: PropTypes.func,
   hasError: PropTypes.bool,
-  history: PropTypes.shape({
-    push: PropTypes.func
-  }),
   loading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth.auth,
   loading: state.auth.loading,
   hasError: state.auth.hasError
 });

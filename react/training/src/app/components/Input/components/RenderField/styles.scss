@@ -1,0 +1,40 @@
+@import 'variables/colors';
+@import 'variables/fontStyles';
+
+.input-control {
+  border: 1px solid $cerulean;
+  border-radius: $border-radius;
+  padding: $padding-y-input $padding-x-input;
+  transition: border-color $transition-duration $transition-function;
+
+  &:focus {
+    box-shadow: 1px 1px 2px $cerulean, -1px -1px 2px $cerulean;
+  }
+
+  &.error {
+    animation: shake $transition-duration $transition-function;
+    border-color: $red;
+
+    &:focus {
+      box-shadow: 1px 1px 2px $red, -1px -1px 2px $red;
+    }
+  }
+}
+
+.message-error {
+  color: $red;
+  font-size: $font-size-small;
+  font-weight: bold;
+}
+
+@keyframes shake {
+  0%, 60% {
+    transform: translateX(-#{$font-size-base});
+  }
+  15%, 45%, 75%, 100% {
+    transform: translateX(0);
+  }
+  30%, 90% {
+    transform: translateX($font-size-base);
+  }
+}

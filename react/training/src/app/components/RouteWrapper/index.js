@@ -1,40 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import AuthService from '~services/AuthService';
 
 import Login from '~screens/Login';
 
 import Game from '~screens/Game';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={() => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        AuthService.setToken(token);
-        return <Component />;
-      }
-      return <Redirect to="/" />;
-    }}
-  />
-);
+import PrivateRoute from './components/PrivateRoute';
 
-function RouteWrapper() {
-  return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Login} />
-        <PrivateRoute path="/game" component={Game} />
-      </Switch>
-    </Router>
-  );
+class RouteWrapper extends Component {
+  isAuth = () => !!(localStorage.getItem('token') || this.props.auth);
+
+  handleLoginRoute = () => (this.isAuth() ? <Redirect to="/" /> : <Login />);
+
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/login" render={this.handleLoginRoute} />
+          <PrivateRoute path="/" exact userAuth={this.isAuth} component={Game} />
+        </Switch>
+      </Router>
+    );
+  }
 }
 
-PrivateRoute.propTypes = {
-  component: PropTypes.func
+RouteWrapper.propTypes = {
+  auth: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string
+  })
 };
 
-export default RouteWrapper;
+const mapStateToProps = state => ({
+  auth: state.auth.auth
+});
+
+export default connect(mapStateToProps)(RouteWrapper);

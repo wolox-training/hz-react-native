@@ -1,5 +1,5 @@
 const defaultState = {
-  auth: false,
+  auth: undefined,
   loading: false,
   hasError: false
 };
