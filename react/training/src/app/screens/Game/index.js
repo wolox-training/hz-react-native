@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react';
 import lines from '~constants';
 
 import Board from './components/Board';
+import Button from './components/Button';
 import style from './styles.scss';
 
 class Game extends Component {
@@ -19,9 +20,13 @@ class Game extends Component {
     const moves = history.map((step, move) => {
       const desc = move ? `Go to move #${move}` : 'Go to game start';
       return (
-        <button key={`autoKey-${move + 1}`} className={style.buttonHistory} onClick={() => this.jumpTo(move)}>
-          {desc}
-        </button>
+        <Button
+          key={`autoKey-${move + 1}`}
+          className={style.buttonHistory}
+          onClick={this.jumpTo}
+          clickParam={move}
+          content={desc}
+        />
       );
     });
     return { current, winner, moves };
