@@ -37,13 +37,15 @@ function Layout(props) {
         <button className={style.buttonSend} type="submit">
           send
         </button>
+        {props.showError && <div className={style.errorInformation}>Invalid data</div>}
       </form>
     </div>
   );
 }
 
 Layout.propTypes = {
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  showError: PropTypes.bool
 };
 
 export default reduxForm({ form: 'loginForm', validate })(Layout);
