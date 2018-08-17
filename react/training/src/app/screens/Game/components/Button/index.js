@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-function Button(props) {
-  return (
-    <button className={props.className} onClick={() => props.onClick(props.clickParam)}>
-      {props.children}
-    </button>
-  );
+class Button extends Component {
+  handleClick = () => {
+    this.props.onClick(this.props.clickParam);
+  };
+
+  render() {
+    return (
+      <button className={this.props.className} onClick={this.handleClick}>
+        {this.props.content}
+      </button>
+    );
+  }
 }
 
 Button.propTypes = {
   className: PropTypes.string,
   clickParam: PropTypes.number,
+  content: PropTypes.string,
   onClick: PropTypes.func
 };
 

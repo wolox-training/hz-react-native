@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
+import lines from '~constants';
+
 import Board from './components/Board';
 import Button from './components/Button';
 import style from './styles.scss';
@@ -21,11 +23,10 @@ class Game extends Component {
         <Button
           key={`autoKey-${move + 1}`}
           className={style.buttonHistory}
-          clickParam={move}
           onClick={this.jumpTo}
-        >
-          {desc}
-        </Button>
+          clickParam={move}
+          content={desc}
+        />
       );
     });
     return { current, winner, moves };
@@ -60,7 +61,6 @@ class Game extends Component {
   };
 
   calculateWinner = squares => {
-    const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     for (let i = 0; i < lines.length; i += 1) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
