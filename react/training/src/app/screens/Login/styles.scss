@@ -12,7 +12,7 @@
 
 .form-login {
   align-items: center;
-  animation: scale $transition-duration $transition-function 50ms forwards;
+  animation: scale $transition-duration $transition-function 80ms forwards;
   background-color: $white;
   border-radius: $border-radius;
   box-shadow: 10px 10px 3px $black-shadow;
@@ -27,29 +27,6 @@
 .img-login {
   margin-bottom: #{$font-size-base * 2};
   width: 80%;
-}
-
-.control-form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: #{$font-size-base};
-  position: relative;
-
-  > input {
-    border: 1px solid $cerulean;
-    border-radius: $border-radius;
-    padding: $padding-y-input $padding-x-input;
-    transition: border-color $transition-duration $transition-function;
-
-    &:focus {
-      box-shadow: 1px 1px 2px $cerulean, -1px -1px 2px $cerulean;
-    }
-  }
-
-  > label {
-    font-size: $font-size-small;
-    margin-bottom: 5px;
-  }
 }
 
 .button-send {
