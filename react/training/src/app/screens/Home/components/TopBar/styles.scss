@@ -1,0 +1,36 @@
+@import 'variables/colors';
+@import 'variables/fontStyles';
+
+.navbar {
+  background-color: $white;
+  display: flex;
+  box-shadow: 0 5px $black-shadow;
+  justify-content: space-between;
+  padding: $font-size-base;
+  position: fixed;
+  width: 100%;
+}
+
+.link-image {
+  width: $width-logo;
+}
+
+.container-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-item {
+  background-color: $cerulean;
+  border-radius: $border-radius;
+  color: $white;
+  margin-right: 6px;
+  padding: 6px;
+  transition: box-shadow $transition-duration $transition-function;
+
+  &:hover, &:active, &:focus {
+    color: $white;
+    box-shadow: 2px 2px 3px $black-shadow;
+  }
+}

@@ -37,6 +37,11 @@ const actionCreators = {
     } catch (error) {
       dispatch(privateActions.requestHasError(true));
     }
+  },
+  logout: () => async dispatch => {
+    localStorage.removeItem('token');
+    AuthService.setToken('');
+    dispatch(privateActions.userAuth(null));
   }
 };
 

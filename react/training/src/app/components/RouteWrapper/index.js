@@ -3,14 +3,11 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import Login from '~screens/Login';
 
-import Game from '~screens/Game';
+import Home from '~screens/Home';
+
+import ROUTES from '~constants/routes';
 
 import PrivateRoute from './components/PrivateRoute';
-
-const ROUTES = {
-  LOGIN: '/login',
-  HOME: '/'
-};
 
 class RouteWrapper extends Component {
   render() {
@@ -18,7 +15,7 @@ class RouteWrapper extends Component {
       <Router>
         <Switch>
           <PrivateRoute isPublicRoute exact path={ROUTES.LOGIN} component={Login} />
-          <PrivateRoute isPrivateRoute path={ROUTES.HOME} component={Game} />
+          <PrivateRoute isPrivateRoute path={ROUTES.HOME} component={Home} />
         </Switch>
       </Router>
     );
