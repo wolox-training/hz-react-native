@@ -1,28 +1,67 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import AuthService from '~services/AuthService';
 
+const DEFAULT_PRIVATE_ROUTE = '/';
+const DEFAULT_PUBLIC_ROUTE = '/login';
+
 class PrivateRoute extends Component {
-  renderContent = () => {
-    const { component: RenderComponent } = this.props;
-    const token = localStorage.getItem('token');
-    if (token) {
-      AuthService.setToken(token);
-      return <RenderComponent />;
+  isAuth = () => !!(localStorage.getItem('token') || this.props.auth);
+
+  renderContent = ({ ...routeProps }) => {
+    const { isPublicRoute, isPrivateRoute, component: Comp } = this.props;
+    if (this.isAuth() && isPublicRoute) {
+      AuthService.setToken(localStorage.getItem('token'));
+      // do not allow logged users to access public routes. redirect to app
+      return (
+        <Redirect
+          to={{
+            pathname: DEFAULT_PRIVATE_ROUTE,
+            state: { from: this.props.location }
+          }}
+        />
+      );
+    } else if (!this.isAuth() && isPrivateRoute) {
+      // do not allow unlogged users to access app. redirect to signin
+      return (
+        <Redirect
+          to={{
+            pathname: DEFAULT_PUBLIC_ROUTE,
+            state: { from: this.props.location }
+          }}
+        />
+      );
     }
-    return <Redirect to="/login" />;
+    return <Comp {...routeProps} />;
   };
 
   render() {
-    const { component: RenderComponent, ...rest } = this.props;
-    return <Route {...rest} render={this.renderContent} />;
+    const { isPublicRoute, isPrivateRoute, auth, component: Comp, ...props } = this.props;
+    return <Route {...props} render={this.renderContent} />;
   }
 }
 
 PrivateRoute.propTypes = {
-  component: PropTypes.func
+  auth: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string
+  }),
+  component: PropTypes.func,
+  isPrivateRoute: PropTypes.bool,
+  isPublicRoute: PropTypes.bool,
+  location: PropTypes.shape({
+    hash: PropTypes.string,
+    key: PropTypes.string,
+    pathname: PropTypes.string,
+    search: PropTypes.string
+  })
 };
 
-export default PrivateRoute;
+const mapStateToProps = state => ({
+  auth: state.auth.auth
+});
+
+export default connect(mapStateToProps)(PrivateRoute);

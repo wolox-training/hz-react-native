@@ -6,11 +6,11 @@ const defaultState = {
 
 export function reducer(state = defaultState, action) {
   switch (action.type) {
-    case 'AUTH_USER':
+    case 'SIGN_IN_SUCCESS':
       return { ...state, auth: action.auth };
-    case 'ASSIGN_LOADING':
+    case 'IS_LOADING':
       return { ...state, loading: action.loading };
-    case 'REQUEST_HAS_ERRORED':
+    case 'SIGN_IN_FAILURE':
       return { ...state, hasError: action.hasError };
     default:
       return state;

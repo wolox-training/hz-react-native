@@ -2,15 +2,15 @@ import AuthService from '~services/AuthService';
 
 const privateActions = {
   requestHasError: isError => ({
-    type: 'REQUEST_HAS_ERRORED',
+    type: 'SIGN_IN_FAILURE',
     hasError: isError
   }),
   assignLoading: loading => ({
-    type: 'ASSIGN_LOADING',
+    type: 'IS_LOADING',
     loading
   }),
   userAuth: user => ({
-    type: 'AUTH_USER',
+    type: 'SIGN_IN_SUCCESS',
     auth: user
   })
 };
@@ -30,7 +30,6 @@ const actionCreators = {
       );
       if (userExist) {
         localStorage.setItem('token', userExist.token);
-        AuthService.setToken(userExist.token);
         dispatch(privateActions.userAuth({ id: userExist.id, email: userExist.email }));
       } else {
         dispatch(privateActions.requestHasError(true));
