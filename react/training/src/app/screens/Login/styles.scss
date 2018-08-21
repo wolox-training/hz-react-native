@@ -43,6 +43,12 @@
   }
 }
 
+.error-information {
+  color: $red;
+  font-weight: bold;
+  margin-top: $font-size-small;
+}
+
 @keyframes scale {
   from {
     transform: scale(0);
