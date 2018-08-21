@@ -6,7 +6,7 @@ const privateActions = {
     hasError: isError
   }),
   assignLoading: loading => ({
-    type: 'IS_LOADING',
+    type: 'SIGN_IN_LOADING',
     loading
   }),
   userAuth: user => ({
