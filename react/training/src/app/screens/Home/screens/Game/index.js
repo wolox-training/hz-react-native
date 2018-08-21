@@ -13,6 +13,10 @@ class Game extends Component {
     xIsNext: true
   };
 
+  componentDidMount() {
+    document.querySelector('body').setAttribute('class', localStorage.getItem('theme') || 'fibre');
+  }
+
   getConst = () => {
     const history = this.state.history;
     const current = history[this.state.stepNumber];

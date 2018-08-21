@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
 
 import { reducer as authReducer } from './Auth/reducer';
+import { reducer as preferencesReducer } from './Preferences/reducer';
 
 const reducers = {
   form: formReducer,
-  auth: authReducer
+  auth: authReducer,
+  preferences: preferencesReducer
 };
 
 const store = createStore(

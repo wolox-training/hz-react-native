@@ -30,6 +30,8 @@ const actionCreators = {
       );
       if (userExist) {
         localStorage.setItem('token', userExist.token);
+        localStorage.setItem('theme', userExist.theme);
+        localStorage.setItem('idUser', userExist.id);
         dispatch(privateActions.userAuth({ id: userExist.id, email: userExist.email }));
       } else {
         dispatch(privateActions.requestHasError(true));
@@ -39,7 +41,7 @@ const actionCreators = {
     }
   },
   logout: () => async dispatch => {
-    localStorage.removeItem('token');
+    localStorage.clear();
     AuthService.setToken('');
     dispatch(privateActions.userAuth(null));
   }

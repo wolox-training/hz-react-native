@@ -1,9 +1,42 @@
 {
   "users": [
-    { "id": 1, "email": "test@wolox.co", "password": "12345678", "token": "React12fully34supports56building" },
-    { "id": 2, "email": "test2@wolox.com.ar", "password": "87654321", "token": "standard88HTML99techniques" },
-    { "id": 3, "email": "test3@example.io", "password": "12345678", "token": "necessary1234to5678allow" },
-    { "id": 4, "email": "test4@gmail.com", "password": "98765432", "token": "websites12345thatcan" },
-    { "id": 5, "email": "test5@email.co", "password": "0987654321", "token": "09876Why123Accessibility" }
+    {
+      "id": 1,
+      "name": "Juanita",
+      "lastName": "Gutierrez",
+      "email": "test@wolox.co",
+      "password": "12345678",
+      "theme": "carbon",
+      "token": "React12fully34supports56building",
+      "repeatPassword": "12345678"
+    },
+    {
+      "id": 2,
+      "name": "John",
+      "lastName": "Doe",
+      "email": "test2@wolox.com.ar",
+      "password": "87654321",
+      "theme": "fibre",
+      "token": "standard88HTML99techniques"
+    },
+    {
+      "id": 3,
+      "name": "Danni Camilo",
+      "lastName": "Abramov",
+      "email": "test3@example.io",
+      "password": "12345678",
+      "theme": "carbon",
+      "token": "necessary1234to5678allow",
+      "repeatPassword": "12345678"
+    },
+    {
+      "id": 4,
+      "name": "Stefanni",
+      "lastName": "Germanotta",
+      "email": "test@wolox.io",
+      "password": "12345678",
+      "theme": "fibre",
+      "token": "websites12345thatcan"
+    }
   ]
 }

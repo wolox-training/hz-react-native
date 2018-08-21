@@ -10,7 +10,7 @@ function Input(props) {
   return (
     <div className={style.controlForm}>
       <label htmlFor={id}>{label}</label>
-      <Field {...inputProps} component={RenderField} />
+      <Field {...inputProps} id={id} component={RenderField} />
     </div>
   );
 }
