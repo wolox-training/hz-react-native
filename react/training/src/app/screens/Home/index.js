@@ -9,6 +9,10 @@ import TopBar from './components/TopBar';
 import styles from './styles.scss';
 
 class Home extends Component {
+  componentDidMount() {
+    document.querySelector('body').setAttribute('class', localStorage.getItem('theme') || 'fibre');
+  }
+
   render() {
     return (
       <Fragment>

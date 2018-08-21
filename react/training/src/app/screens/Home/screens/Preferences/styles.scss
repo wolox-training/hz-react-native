@@ -37,7 +37,7 @@
 }
 
 .success-information {
-  animation: scaleText 5s $transition-function forwards;
+  animation: scaleText 4s $transition-function forwards;
   border: 2px solid $green;
   border-radius: $border-radius;
   color: $green;
@@ -50,7 +50,7 @@
   0%, 100% {
     transform: scale(0);
   }
-  50%, 75% {
+  25%, 75% {
     transform: scale(1);
   }
 }

@@ -3,15 +3,17 @@ import AuthService from '~services/AuthService';
 const privateActions = {
   requestHasError: isError => ({
     type: 'SIGN_IN_FAILURE',
-    hasError: isError
+    target: 'signIn',
+    payload: isError
   }),
-  assignLoading: loading => ({
-    type: 'IS_LOADING',
-    loading
+  assignLoading: () => ({
+    type: 'SIGN_IN_LOADING',
+    target: 'signIn'
   }),
   userAuth: user => ({
     type: 'SIGN_IN_SUCCESS',
-    auth: user
+    target: 'signIn',
+    payload: user
   })
 };
 

@@ -25,7 +25,7 @@ function Layout(props) {
         update
       </button>
       {props.showError && <div className={style.errorInformation}>Invalid data</div>}
-      {props.success && <div className={style.successInformation}>Data updated</div>}
+      {props.dataUpdated && <div className={style.successInformation}>Data updated</div>}
     </form>
   );
 }
@@ -33,7 +33,7 @@ function Layout(props) {
 Layout.propTypes = {
   handleSubmit: PropTypes.func,
   showError: PropTypes.bool,
-  success: PropTypes.bool
+  dataUpdated: PropTypes.shape()
 };
 
 export default reduxForm({ form: 'preferencesForm', validate, enableReinitialize: true })(Layout);

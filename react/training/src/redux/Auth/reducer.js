@@ -1,18 +1,16 @@
+import { createReducer, onSuccess, onLoading, onFailure } from 'redux-recompose';
+import Immutable from 'seamless-immutable';
+
 const defaultState = {
-  auth: undefined,
-  loading: false,
-  hasError: false
+  signIn: undefined,
+  signInLoading: false,
+  signInError: false
 };
 
-export function reducer(state = defaultState, action) {
-  switch (action.type) {
-    case 'SIGN_IN_SUCCESS':
-      return { ...state, auth: action.auth };
-    case 'IS_LOADING':
-      return { ...state, loading: action.loading };
-    case 'SIGN_IN_FAILURE':
-      return { ...state, hasError: action.hasError };
-    default:
-      return state;
-  }
-}
+const reducerDescription = {
+  SIGN_IN_SUCCESS: onSuccess(),
+  SIGN_IN_LOADING: onLoading(),
+  SIGN_IN_FAILURE: onFailure()
+};
+
+export default createReducer(Immutable(defaultState), reducerDescription);

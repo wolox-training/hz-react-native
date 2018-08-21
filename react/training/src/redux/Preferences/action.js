@@ -2,22 +2,26 @@ import UserService from '~services/UserService';
 
 const privateActions = {
   assignUserData: data => ({
-    type: 'LOAD_USER_DATA',
-    data
+    type: 'USER_DATA_SUCCESS',
+    target: 'userData',
+    payload: data
   }),
   requestHasError: isError => ({
-    type: 'GET_USER_FAILURE',
-    hasError: isError
+    type: 'USER_DATA_FAILURE',
+    target: 'userData',
+    payload: isError
   }),
-  requestSuccess: success => ({
-    type: 'UPDATE_USER_SUCCESS',
-    success
+  requestUpdate: data => ({
+    type: 'USER_DATA_UPDATE',
+    target: 'userDataUpdated',
+    payload: data
   })
 };
 
 const actionCreators = {
   getUser: id => async dispatch => {
     const response = await UserService.getUser(id);
+    dispatch(privateActions.requestUpdate(null));
     try {
       if (!response.ok) {
         throw Error(response.statusText);
@@ -28,13 +32,14 @@ const actionCreators = {
     }
   },
   updateUser: (id, data) => async dispatch => {
+    dispatch(privateActions.requestUpdate(null));
     const response = await UserService.updateUser(id, data);
     try {
       if (!response.ok) {
         throw Error(response.statusText);
       }
       localStorage.setItem('theme', data.theme);
-      dispatch(privateActions.requestSuccess(true));
+      dispatch(privateActions.requestUpdate(response.data));
     } catch (error) {
       dispatch(privateActions.requestHasError(true));
     }
