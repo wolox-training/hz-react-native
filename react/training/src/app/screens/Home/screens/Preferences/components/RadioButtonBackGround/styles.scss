@@ -1,19 +1,41 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
-@import 'equalizer';
 @import 'variables/colors';
 @import 'variables/fontStyles';
 
-body {
-  background:
-      radial-gradient($black 15%, transparent 16%) 0 0,
-      radial-gradient($black 15%, transparent 16%) 8px 8px,
-      radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
-      radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
-  background-color:#282828;
-  background-size: 16px 16px;
-  font: $font-size-base 'Montserrat', sans-serif;
+.radio-background {
+  & > input {
+    display: none;
 
-  &.fibre {
+    &:checked + label {
+      border: 6px solid darken($cerulean, 15%);
+    }
+  }
+
+  & > label {
+    border: 2px solid $cerulean;
+    border-radius: $border-radius;
+    cursor: pointer;
+    height: 100%;
+    position: relative;
+    transition: border $transition-duration $transition-function;
+    width: #{$font-size-base * 6};
+
+    &:hover, &:active, &:focus {
+      border: 6px solid darken($cerulean, 15%);
+    }
+
+    &:before {
+      align-items: center;
+      color: $white;
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
+
+  &:first-child > label {
     background:
       radial-gradient($black 15%, transparent 16%) 0 0,
       radial-gradient($black 15%, transparent 16%) 8px 8px,
@@ -21,9 +43,13 @@ body {
       radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
     background-color:#282828;
     background-size: 16px 16px;
+
+    &:before {
+      content: 'Fibre';
+    }
   }
 
-  &.carbon {
+  &:nth-child(2) > label {
     background:
       linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
       linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
@@ -33,21 +59,20 @@ body {
       linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424);
     background-color: #131313;
     background-size: 20px 20px;
+
+    &:before {
+      content: 'Carbon';
+    }
   }
 
-  &.chocolate {
+  &:last-child > label {
     background: linear-gradient(45deg, lighten($black, 5%) 12%, transparent 0, transparent 88%, lighten($black, 5%) 0),
       linear-gradient(135deg, transparent 37%, lighten($black, 10%) 0, lighten($black, 10%) 63%, transparent 0),
       linear-gradient(45deg, transparent 37%, lighten($black, 5%) 0, lighten($black, 5%) 63%, transparent 0) lighten($black, 20%);
-    background-size: 30px 30px;
+    background-size: 25px 25px;
+
+    &:before {
+      content: 'Chocolate';
+    }
   }
-}
-
-label {
-  font-size: $font-size-small;
-  margin-bottom: 5px;
-}
-
-img {
-  width: 100%;
 }

@@ -28,16 +28,14 @@ function TopBar({ logout }) {
 }
 
 TopBar.propTypes = {
-  logout: PropTypes.func
+  logout: PropTypes.func.isRequired
 };
-
-const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(authActions.logout())
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(TopBar);

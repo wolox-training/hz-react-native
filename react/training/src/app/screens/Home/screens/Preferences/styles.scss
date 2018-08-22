@@ -1,5 +1,56 @@
 @import 'variables/colors';
+@import 'variables/fontStyles';
 
-.content {
+.form-preferences {
+  align-items: center;
+  background-color: $white;
+  border-radius: $border-radius;
+  display: flex;
+  flex-direction: column;
+  margin: $font-size-base auto 0;
+  max-width: 100%;
+  padding: $font-size-base;
+  width: 400px;
+}
+
+.container-theme {
+  display: flex;
+  height: 100px;
+  justify-content: space-evenly;
+  margin-bottom: $font-size-base;
+  padding: 6px;
+  width: 100%;
+}
+
+.button-update {
+  background-color: $cerulean;
+  border-radius: $border-radius;
+  box-shadow: 1px 1px 2px $black-shadow;
   color: $white;
+  padding: 7px $font-size-base;
+  text-transform: uppercase;
+  transition: box-shadow $transition-duration $transition-function;
+
+  &:hover, &:active {
+    box-shadow: 2px 3px 3px $black-shadow;
+  }
+}
+
+.success-information {
+  animation: scaleText 5s $transition-function forwards;
+  border: 2px solid $green;
+  border-radius: $border-radius;
+  color: $green;
+  padding: 6px $font-size-base;
+  position: relative;
+  margin-top: $font-size-base;
+}
+
+@keyframes scaleText {
+  0%, 100% {
+    transform: scale(0);
+  }
+  50%, 75% {
+    transform: scale(1);
+  }
 }
