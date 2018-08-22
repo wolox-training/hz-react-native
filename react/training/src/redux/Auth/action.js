@@ -6,7 +6,7 @@ const privateActions = {
     hasError: isError
   }),
   assignLoading: loading => ({
-    type: 'IS_LOADING',
+    type: 'SIGN_IN_LOADING',
     loading
   }),
   userAuth: user => ({
@@ -37,6 +37,11 @@ const actionCreators = {
     } catch (error) {
       dispatch(privateActions.requestHasError(true));
     }
+  },
+  logout: () => async dispatch => {
+    localStorage.removeItem('token');
+    AuthService.setToken('');
+    dispatch(privateActions.userAuth(null));
   }
 };
 
