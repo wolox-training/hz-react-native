@@ -2,12 +2,11 @@
   "users": [
     {
       "id": 1,
-      "name": "Juanita",
-      "lastName": "Gutierrez",
+      "name": "Jane",
+      "lastName": "Doe",
       "email": "test@wolox.co",
       "password": "12345678",
       "theme": "carbon",
-      "token": "React12fully34supports56building",
       "repeatPassword": "12345678"
     },
     {

@@ -16,8 +16,8 @@ const privateActions = {
 };
 
 const actionCreators = {
-  getUser: id => async dispatch => {
-    const response = await UserService.getUser(id);
+  getUser: () => async dispatch => {
+    const response = await UserService.getUser(localStorage.getItem('idUser'));
     try {
       if (!response.ok) {
         throw Error(response.statusText);
@@ -27,8 +27,8 @@ const actionCreators = {
       dispatch(privateActions.requestHasError(true));
     }
   },
-  updateUser: (id, data) => async dispatch => {
-    const response = await UserService.updateUser(id, data);
+  updateUser: data => async dispatch => {
+    const response = await UserService.updateUser(localStorage.getItem('idUser'), data);
     try {
       if (!response.ok) {
         throw Error(response.statusText);
