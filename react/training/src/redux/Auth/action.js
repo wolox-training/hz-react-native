@@ -20,6 +20,7 @@ const privateActions = {
 const actionCreators = {
   authUser: currentUser => async dispatch => {
     dispatch(privateActions.assignLoading(true));
+    await AuthService.timeOut(1000); // emulated server delay
     const response = await AuthService.getUsers();
     try {
       if (!response.ok) {

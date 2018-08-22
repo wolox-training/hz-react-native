@@ -1,5 +1,7 @@
 import UserService from '~services/UserService';
 
+import AuthService from '~services/AuthService';
+
 const privateActions = {
   assignUserData: data => ({
     type: 'USER_DATA_SUCCESS',
@@ -20,8 +22,9 @@ const privateActions = {
 
 const actionCreators = {
   getUser: id => async dispatch => {
-    const response = await UserService.getUser(id);
     dispatch(privateActions.requestUpdate(null));
+    await AuthService.timeOut(1000); // emulated server delay
+    const response = await UserService.getUser(id);
     try {
       if (!response.ok) {
         throw Error(response.statusText);
@@ -33,6 +36,7 @@ const actionCreators = {
   },
   updateUser: (id, data) => async dispatch => {
     dispatch(privateActions.requestUpdate(null));
+    await AuthService.timeOut(1000); // emulated server delay
     const response = await UserService.updateUser(id, data);
     try {
       if (!response.ok) {

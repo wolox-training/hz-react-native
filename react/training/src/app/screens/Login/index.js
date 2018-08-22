@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import authActions from '~redux/Auth/action';
 
+import Loader from '~components/Loader';
+
 import Layout from './layout';
 
 class Login extends Component {
@@ -12,18 +14,13 @@ class Login extends Component {
   };
 
   render() {
-    return this.props.loading ? (
-      <div>Loading ... </div>
-    ) : (
-      <Layout showError={this.props.hasError} onSubmit={this.handleSubmit} />
-    );
+    return <Layout showError={this.props.hasError} onSubmit={this.handleSubmit} />;
   }
 }
 
 Login.propTypes = {
   authUser: PropTypes.func,
-  hasError: PropTypes.bool,
-  loading: PropTypes.bool
+  hasError: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
@@ -38,4 +35,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(Loader(Login));

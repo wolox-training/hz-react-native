@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import preferencesActions from '~redux/Preferences/action';
 
+import Loader from '~components/Loader';
+
 import Layout from './layout';
 
 class Preferences extends Component {
@@ -50,7 +52,8 @@ Preferences.propTypes = {
 const mapStateToProps = state => ({
   initialValues: state.preferences.userData,
   hasError: state.preferences.userDataError,
-  dataUpdated: state.preferences.userDataUpdated
+  dataUpdated: state.preferences.userDataUpdated,
+  loading: state.preferences.userDataLoading
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -61,4 +64,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Preferences);
+)(Loader(Preferences));

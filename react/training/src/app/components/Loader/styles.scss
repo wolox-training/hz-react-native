@@ -1,0 +1,56 @@
+@import 'variables/colors';
+@import 'variables/fontStyles';
+
+.loader {
+  height: 80px;
+  left: 0;
+  margin: 0 auto;
+  position: fixed;
+  right: 0;
+  top: 45vh;
+  width: 80px;
+  
+  &:before, &:after {
+    animation: wave 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    border: 4px solid $white;
+    border-radius: 50%;
+    content: '';
+    left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+  }
+
+  &:before {
+    height: 50px;
+    top: 10px;
+    width: 50px;
+  }
+
+  &:after {
+    animation-delay: -0.5s;
+    height: 70px;
+    width: 70px;
+  }
+}
+
+.loader-text {
+  bottom: -#{$font-size-base};
+  color: $white;
+  font-size: $font-size-small;
+  left: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+}
+
+@keyframes wave {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
