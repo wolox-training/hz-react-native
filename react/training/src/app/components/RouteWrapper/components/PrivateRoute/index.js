@@ -45,10 +45,7 @@ class PrivateRoute extends Component {
 }
 
 PrivateRoute.propTypes = {
-  auth: PropTypes.shape({
-    id: PropTypes.number,
-    email: PropTypes.string
-  }),
+  auth: PropTypes.bool,
   component: PropTypes.func,
   isPrivateRoute: PropTypes.bool,
   isPublicRoute: PropTypes.bool,

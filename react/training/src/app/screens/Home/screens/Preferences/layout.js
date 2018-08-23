@@ -33,7 +33,7 @@ function Layout(props) {
 Layout.propTypes = {
   handleSubmit: PropTypes.func,
   showError: PropTypes.bool,
-  dataUpdated: PropTypes.shape()
+  dataUpdated: PropTypes.bool
 };
 
 export default reduxForm({ form: 'preferencesForm', validate, enableReinitialize: true })(Layout);

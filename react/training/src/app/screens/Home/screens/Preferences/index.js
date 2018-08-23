@@ -10,11 +10,11 @@ import Layout from './layout';
 
 class Preferences extends Component {
   componentDidMount() {
-    this.props.loadUserData(localStorage.getItem('idUser'));
+    this.props.loadUserData();
   }
 
   handleSubmit = async values => {
-    this.props.updateUser(localStorage.getItem('idUser'), values);
+    this.props.updateUser(values);
   };
 
   render() {
@@ -40,13 +40,7 @@ Preferences.propTypes = {
   }),
   loadUserData: PropTypes.func.isRequired,
   updateUser: PropTypes.func,
-  dataUpdated: PropTypes.shape({
-    name: PropTypes.string,
-    lastName: PropTypes.string,
-    email: PropTypes.string,
-    password: PropTypes.string,
-    repeatPassword: PropTypes.string
-  })
+  dataUpdated: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
@@ -57,8 +51,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadUserData: idUser => dispatch(preferencesActions.getUser(idUser)),
-  updateUser: (idUser, data) => dispatch(preferencesActions.updateUser(idUser, data))
+  loadUserData: () => dispatch(preferencesActions.getUser()),
+  updateUser: data => dispatch(preferencesActions.updateUser(data))
 });
 
 export default connect(

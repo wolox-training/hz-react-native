@@ -1,5 +1,6 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { fetchMiddleware } from 'redux-recompose';
 import { reducer as formReducer } from 'redux-form';
 
 import authReducer from './Auth/reducer';
@@ -11,10 +12,10 @@ const reducers = {
   preferences: preferencesReducer
 };
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line no-underscore-dangle
 const store = createStore(
   combineReducers(reducers),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), // eslint-disable-line no-underscore-dangle
-  applyMiddleware(thunk)
+  composeEnhancers(applyMiddleware(thunk, fetchMiddleware))
 );
 
 export default store;
