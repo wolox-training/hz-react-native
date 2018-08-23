@@ -1,52 +1,32 @@
+import { completeTypes, createTypes } from 'redux-recompose';
+
 import AuthService from '~services/AuthService';
 
-const privateActions = {
-  requestHasError: isError => ({
-    type: 'SIGN_IN_FAILURE',
-    target: 'signIn',
-    payload: isError
-  }),
-  assignLoading: () => ({
-    type: 'SIGN_IN_LOADING',
-    target: 'signIn'
-  }),
-  userAuth: user => ({
-    type: 'SIGN_IN_SUCCESS',
-    target: 'signIn',
-    payload: user
-  })
-};
+export const actions = createTypes(completeTypes(['SIGN_IN']), '@@AUTH');
 
 const actionCreators = {
-  authUser: currentUser => async dispatch => {
-    dispatch(privateActions.assignLoading(true));
-    const response = await AuthService.getUsers();
-    try {
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-
-      dispatch(privateActions.assignLoading(false));
-      const userExist = response.data.find(
-        user => user.email === currentUser.email && user.password === currentUser.password
-      );
-      if (userExist) {
-        localStorage.setItem('token', userExist.token);
-        localStorage.setItem('theme', userExist.theme);
-        localStorage.setItem('idUser', userExist.id);
-        dispatch(privateActions.userAuth({ id: userExist.id, email: userExist.email }));
-      } else {
-        dispatch(privateActions.requestHasError(true));
-      }
-    } catch (error) {
-      dispatch(privateActions.requestHasError(true));
+  authUser: currentUser => ({
+    type: actions.SIGN_IN,
+    target: 'signIn',
+    service: AuthService.getUser,
+    payload: currentUser,
+    successSelector: ({ data }) => {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('theme', data.theme);
+      localStorage.setItem('idUser', data.id);
+      return true;
     }
-  },
-  logout: () => async dispatch => {
-    localStorage.clear();
-    AuthService.setToken('');
-    dispatch(privateActions.userAuth(null));
-  }
+  }),
+  logout: () => ({
+    type: actions.SIGN_IN,
+    target: 'signIn',
+    service: AuthService.logout,
+    successSelector: () => {
+      localStorage.clear();
+      AuthService.setToken('');
+      return false;
+    }
+  })
 };
 
 export default actionCreators;

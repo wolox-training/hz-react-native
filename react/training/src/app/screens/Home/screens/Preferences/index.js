@@ -38,13 +38,7 @@ Preferences.propTypes = {
   }),
   loadUserData: PropTypes.func.isRequired,
   updateUser: PropTypes.func,
-  dataUpdated: PropTypes.shape({
-    name: PropTypes.string,
-    lastName: PropTypes.string,
-    email: PropTypes.string,
-    password: PropTypes.string,
-    repeatPassword: PropTypes.string
-  })
+  dataUpdated: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

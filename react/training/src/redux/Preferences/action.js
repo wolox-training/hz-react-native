@@ -1,37 +1,29 @@
+import { completeTypes, createTypes, withPostSuccess, withPrefetch } from 'redux-recompose';
+
 import UserService from '~services/UserService';
 
+export const actions = createTypes(
+  completeTypes(['FETCH_USER_DATA', 'UPDATE_USER_DATA'], ['USER_DATA_UPDATED']),
+  '@@USER'
+);
+
 const privateActions = {
-  assignUserData: data => ({
-    type: 'USER_DATA_SUCCESS',
-    target: 'userData',
-    payload: data
-  }),
-  requestHasError: isError => ({
-    type: 'USER_DATA_FAILURE',
-    target: 'userData',
-    payload: isError
-  }),
-  requestUpdate: data => ({
-    type: 'USER_DATA_UPDATE',
+  dataUpdated: isUpdated => ({
+    type: actions.USER_DATA_UPDATED,
     target: 'userDataUpdated',
-    payload: data
+    payload: isUpdated
   })
 };
 
 const actionCreators = {
-  getUser: () => async dispatch => {
-    const response = await UserService.getUser(localStorage.getItem('idUser'));
-    dispatch(privateActions.requestUpdate(null));
-    try {
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      dispatch(privateActions.assignUserData({ ...response.data, repeatPassword: response.data.password }));
-    } catch (error) {
-      dispatch(privateActions.requestHasError(true));
-    }
-  },
-  updateUser: data => async dispatch => {
+  getUser: () => ({
+    type: actions.FETCH_USER_DATA,
+    target: 'userData',
+    service: UserService.getUser,
+    payload: localStorage.getItem('idUser'),
+    successSelector: ({ data }) => ({ ...data, repeatPassword: data.password })
+  }),
+  updateUser2: data => async dispatch => {
     dispatch(privateActions.requestUpdate(null));
     const response = await UserService.updateUser(localStorage.getItem('idUser'), data);
     try {
@@ -43,7 +35,21 @@ const actionCreators = {
     } catch (error) {
       dispatch(privateActions.requestHasError(true));
     }
-  }
+  },
+  updateUser: userData => ({
+    type: actions.UPDATE_USER_DATA,
+    target: 'userData',
+    service: UserService.updateUser,
+    payload: userData,
+    successSelector: ({ data }) => {
+      localStorage.setItem('theme', data.theme);
+      return data;
+    },
+    injections: [
+      withPrefetch(dispatch => dispatch(privateActions.dataUpdated(false))),
+      withPostSuccess(dispatch => dispatch(privateActions.dataUpdated(true)))
+    ]
+  })
 };
 
 export default actionCreators;
