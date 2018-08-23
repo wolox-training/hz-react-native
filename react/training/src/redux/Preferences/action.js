@@ -23,19 +23,6 @@ const actionCreators = {
     payload: localStorage.getItem('idUser'),
     successSelector: ({ data }) => ({ ...data, repeatPassword: data.password })
   }),
-  updateUser2: data => async dispatch => {
-    dispatch(privateActions.requestUpdate(null));
-    const response = await UserService.updateUser(localStorage.getItem('idUser'), data);
-    try {
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      localStorage.setItem('theme', data.theme);
-      dispatch(privateActions.requestUpdate(response.data));
-    } catch (error) {
-      dispatch(privateActions.requestHasError(true));
-    }
-  },
   updateUser: userData => ({
     type: actions.UPDATE_USER_DATA,
     target: 'userData',
