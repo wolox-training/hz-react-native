@@ -1,6 +1,12 @@
-import api from '../config/api';
+import api, { timeOut } from '../config/api';
 
 export default {
-  getUser: id => api.get(`/users/${id}`),
-  updateUser: data => api.put(`/users/${data.id}`, data)
+  getUser: async id => {
+    await timeOut(1000); // emulated server delay
+    return api.get(`/users/${id}`);
+  },
+  updateUser: async data => {
+    await timeOut(1000); // emulated server delay
+    return api.put(`/users/${data.id}`, data);
+  }
 };

@@ -2,8 +2,6 @@ import { completeTypes, createTypes, withPostSuccess, withPrefetch } from 'redux
 
 import UserService from '~services/UserService';
 
-// await AuthService.timeOut(1000); // emulated server delay
-
 export const actions = createTypes(
   completeTypes(['FETCH_USER_DATA', 'UPDATE_USER_DATA'], ['USER_DATA_UPDATED']),
   '@@USER'

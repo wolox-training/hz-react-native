@@ -1,7 +1,7 @@
 import { completeTypes, createTypes } from 'redux-recompose';
 
 import AuthService from '~services/AuthService';
-// await AuthService.timeOut(1000); // emulated server delay
+
 export const actions = createTypes(completeTypes(['SIGN_IN']), '@@AUTH');
 
 const actionCreators = {

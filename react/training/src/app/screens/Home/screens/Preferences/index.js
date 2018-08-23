@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 
 import preferencesActions from '~redux/Preferences/action';
 
-import Loader from '~components/Loader';
-
 import Layout from './layout';
 
 class Preferences extends Component {
@@ -13,7 +11,7 @@ class Preferences extends Component {
     this.props.loadUserData();
   }
 
-  handleSubmit = async values => {
+  handleSubmit = values => {
     this.props.updateUser(values);
   };
 
@@ -23,6 +21,7 @@ class Preferences extends Component {
         initialValues={this.props.initialValues}
         dataUpdated={this.props.dataUpdated}
         showError={this.props.hasError}
+        loading={this.props.loading}
         onSubmit={this.handleSubmit}
       />
     );
@@ -40,7 +39,8 @@ Preferences.propTypes = {
   }),
   loadUserData: PropTypes.func.isRequired,
   updateUser: PropTypes.func,
-  dataUpdated: PropTypes.bool
+  dataUpdated: PropTypes.bool,
+  loading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
@@ -58,4 +58,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Loader(Preferences));
+)(Preferences);
