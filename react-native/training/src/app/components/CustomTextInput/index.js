@@ -12,10 +12,22 @@ import styles from './styles';
 // https://github.com/facebook/react-native/issues/5859
 
 class CustomTextInput extends PureComponent {
-  state = { showPassword: false };
+  state = { showPassword: false, inputValue: '' };
 
   handleShowPassword = () => {
     this.setState(prevState => ({ showPassword: !prevState.showPassword }));
+  };
+
+  updateValue = value => {
+    this.setState({ inputValue: value });
+    if (this.props.onChange) {
+      this.props.onChange(value);
+    }
+  };
+
+  handleSubmitEditing = () => {
+    this.props.onSubmitEditing(this.state.inputValue);
+    this.setState({ inputValue: '' });
   };
 
   render() {
@@ -38,10 +50,11 @@ class CustomTextInput extends PureComponent {
           <TextInput
             {...this.props}
             allowFontScaling={false}
-            onChangeText={this.props.onChange}
+            onChangeText={this.updateValue}
             onBlur={this.props.onBlur}
             onFocus={this.props.onFocus}
-            value={this.props.value}
+            onSubmitEditing={this.handleSubmitEditing}
+            value={this.props.value || this.state.inputValue}
             style={[
               styles.inputStyle,
               this.props.multiline ? styles.multilineInput : styles.singleInput,
@@ -92,6 +105,7 @@ CustomTextInput.propTypes = {
   textStyles: Text.propTypes.style,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
+  onSubmitEditing: PropTypes.func,
   onFocus: PropTypes.func,
   value: PropTypes.string,
   placeholderTextColor: PropTypes.string,

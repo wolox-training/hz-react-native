@@ -7,7 +7,7 @@ const namespace = 'app';
 const translations = {
   es: {
     [Routes.Login]: 'Login',
-    [Routes.Tab1]: 'Tab 1',
+    [Routes.TodoList]: 'TodoList',
     [Routes.Tab2]: 'Tab 2',
     [Routes.Home]: 'Home'
   }
