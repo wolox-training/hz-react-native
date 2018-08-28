@@ -13,6 +13,6 @@ export default {
     }
     return response;
   },
-  logout: () => ({ ok: true, status: 200 }),
+  logout: () => ({ ok: true, status: 200, data: false }),
   setToken: token => api.setHeader('Authorization', token)
 };
