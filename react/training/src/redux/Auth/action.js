@@ -1,4 +1,4 @@
-import { completeTypes, createTypes } from 'redux-recompose';
+import { completeTypes, createTypes, withPostSuccess } from 'redux-recompose';
 
 import AuthService from '~services/AuthService';
 
@@ -10,12 +10,14 @@ const actionCreators = {
     target: 'signIn',
     service: AuthService.getUser,
     payload: currentUser,
-    successSelector: ({ data }) => {
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('theme', data.theme);
-      localStorage.setItem('idUser', data.id);
-      return true;
-    }
+    injections: [
+      withPostSuccess((dispatch, response) => {
+        localStorage.setItem('theme', response.data.theme);
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('idUser', response.data.id);
+        document.querySelector('body').setAttribute('class', response.data.theme || 'fibre');
+      })
+    ]
   }),
   logout: () => ({
     type: actions.SIGN_IN,
@@ -24,6 +26,7 @@ const actionCreators = {
     successSelector: () => {
       localStorage.clear();
       AuthService.setToken('');
+      document.querySelector('body').setAttribute('class', 'fibre');
       return false;
     }
   })
