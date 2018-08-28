@@ -13,6 +13,7 @@ import { stackNavConfig, screensNavOptions, tabNavConfig } from '../config/navig
 import Login from './screens/Login';
 import Home from './screens/Home';
 import TodoList from './screens/Home/screens/TodoList';
+import Book from './screens/Home/screens/Book';
 
 // ------------------ Initial loading screen
 // TODO: URGENT! Move this component to a separated file and use it ONLY if the project has login.
@@ -62,9 +63,13 @@ export default createStackNavigator(
             screen: TodoList,
             navigationOptions: screensNavOptions[Routes.TodoList]
           },
-          [Routes.Tab2]: {
+          [Routes.Book]: {
+            screen: Book,
+            navigationOptions: screensNavOptions[Routes.Book]
+          },
+          [Routes.Home]: {
             screen: Home,
-            navigationOptions: screensNavOptions[Routes.Tab2]
+            navigationOptions: screensNavOptions[Routes.Home]
           }
         },
         tabNavConfig

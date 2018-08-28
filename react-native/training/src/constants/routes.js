@@ -1,5 +1,5 @@
 exports.InitialLoading = 'InitialLoading';
 exports.Login = 'Login';
 exports.Home = 'Home';
-exports.TodoList = 'TodoList';
-exports.Tab2 = 'Tab2';
+exports.TodoList = 'Todo List';
+exports.Book = 'Books';
