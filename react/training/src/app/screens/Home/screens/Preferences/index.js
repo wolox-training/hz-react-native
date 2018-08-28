@@ -11,7 +11,7 @@ class Preferences extends Component {
     this.props.loadUserData();
   }
 
-  handleSubmit = async values => {
+  handleSubmit = values => {
     this.props.updateUser(values);
   };
 
@@ -21,6 +21,7 @@ class Preferences extends Component {
         initialValues={this.props.initialValues}
         dataUpdated={this.props.dataUpdated}
         showError={this.props.hasError}
+        loading={this.props.loading}
         onSubmit={this.handleSubmit}
       />
     );
@@ -38,13 +39,15 @@ Preferences.propTypes = {
   }),
   loadUserData: PropTypes.func.isRequired,
   updateUser: PropTypes.func,
-  dataUpdated: PropTypes.bool
+  dataUpdated: PropTypes.bool,
+  loading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   initialValues: state.preferences.userData,
   hasError: state.preferences.userDataError,
-  dataUpdated: state.preferences.userDataUpdated
+  dataUpdated: state.preferences.userDataUpdated,
+  loading: state.preferences.userDataLoading
 });
 
 const mapDispatchToProps = dispatch => ({
