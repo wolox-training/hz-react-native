@@ -1,53 +1,41 @@
+import { completeTypes, createTypes, withPostSuccess, withPrefetch } from 'redux-recompose';
+
 import UserService from '~services/UserService';
 
-import AuthService from '~services/AuthService';
+export const actions = createTypes(
+  completeTypes(['FETCH_USER_DATA', 'UPDATE_USER_DATA'], ['USER_DATA_UPDATED']),
+  '@@USER'
+);
 
 const privateActions = {
-  assignUserData: data => ({
-    type: 'USER_DATA_SUCCESS',
-    target: 'userData',
-    payload: data
-  }),
-  requestHasError: isError => ({
-    type: 'USER_DATA_FAILURE',
-    target: 'userData',
-    payload: isError
-  }),
-  requestUpdate: data => ({
-    type: 'USER_DATA_UPDATE',
+  dataUpdated: isUpdated => ({
+    type: actions.USER_DATA_UPDATED,
     target: 'userDataUpdated',
-    payload: data
+    payload: isUpdated
   })
 };
 
 const actionCreators = {
-  getUser: id => async dispatch => {
-    dispatch(privateActions.requestUpdate(null));
-    await AuthService.timeOut(1000); // emulated server delay
-    const response = await UserService.getUser(id);
-    try {
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      dispatch(privateActions.assignUserData({ ...response.data, repeatPassword: response.data.password }));
-    } catch (error) {
-      dispatch(privateActions.requestHasError(true));
-    }
-  },
-  updateUser: (id, data) => async dispatch => {
-    dispatch(privateActions.requestUpdate(null));
-    await AuthService.timeOut(1000); // emulated server delay
-    const response = await UserService.updateUser(id, data);
-    try {
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      localStorage.setItem('theme', data.theme);
-      dispatch(privateActions.requestUpdate(response.data));
-    } catch (error) {
-      dispatch(privateActions.requestHasError(true));
-    }
-  }
+  getUser: () => ({
+    type: actions.FETCH_USER_DATA,
+    target: 'userData',
+    service: UserService.getUser,
+    payload: localStorage.getItem('idUser'),
+    successSelector: ({ data }) => ({ ...data, repeatPassword: data.password })
+  }),
+  updateUser: userData => ({
+    type: actions.UPDATE_USER_DATA,
+    target: 'userData',
+    service: UserService.updateUser,
+    payload: userData,
+    injections: [
+      withPrefetch(dispatch => dispatch(privateActions.dataUpdated(false))),
+      withPostSuccess((dispatch, response) => {
+        localStorage.setItem('theme', response.data.theme);
+        dispatch(privateActions.dataUpdated(true));
+      })
+    ]
+  })
 };
 
 export default actionCreators;

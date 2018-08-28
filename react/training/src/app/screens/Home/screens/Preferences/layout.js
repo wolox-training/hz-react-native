@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 
+import Loader from '~components/Loader';
+
 import Input from '~components/Input';
 
 import RadioButtonBackGround from './components/RadioButtonBackGround';
@@ -33,7 +35,7 @@ function Layout(props) {
 Layout.propTypes = {
   handleSubmit: PropTypes.func,
   showError: PropTypes.bool,
-  dataUpdated: PropTypes.shape()
+  dataUpdated: PropTypes.bool
 };
 
-export default reduxForm({ form: 'preferencesForm', validate, enableReinitialize: true })(Layout);
+export default reduxForm({ form: 'preferencesForm', validate, enableReinitialize: true })(Loader(Layout));
