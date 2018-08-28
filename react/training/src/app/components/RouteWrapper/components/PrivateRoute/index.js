@@ -45,10 +45,7 @@ class PrivateRoute extends Component {
 }
 
 PrivateRoute.propTypes = {
-  auth: PropTypes.shape({
-    id: PropTypes.number,
-    email: PropTypes.string
-  }),
+  auth: PropTypes.bool,
   component: PropTypes.func,
   isPrivateRoute: PropTypes.bool,
   isPublicRoute: PropTypes.bool,
@@ -61,7 +58,7 @@ PrivateRoute.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth.auth
+  auth: !!state.auth.signIn
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

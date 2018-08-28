@@ -1,50 +1,35 @@
+import { completeTypes, createTypes, withPostSuccess } from 'redux-recompose';
+
 import AuthService from '~services/AuthService';
 
-const privateActions = {
-  requestHasError: isError => ({
-    type: 'SIGN_IN_FAILURE',
-    hasError: isError
-  }),
-  assignLoading: loading => ({
-    type: 'SIGN_IN_LOADING',
-    loading
-  }),
-  userAuth: user => ({
-    type: 'SIGN_IN_SUCCESS',
-    auth: user
-  })
-};
+export const actions = createTypes(completeTypes(['SIGN_IN']), '@@AUTH');
 
 const actionCreators = {
-  authUser: currentUser => async dispatch => {
-    dispatch(privateActions.assignLoading(true));
-    const response = await AuthService.getUsers();
-    try {
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-
-      dispatch(privateActions.assignLoading(false));
-      const userExist = response.data.find(
-        user => user.email === currentUser.email && user.password === currentUser.password
-      );
-      if (userExist) {
-        localStorage.setItem('token', userExist.token);
-        localStorage.setItem('theme', userExist.theme);
-        localStorage.setItem('idUser', userExist.id);
-        dispatch(privateActions.userAuth({ id: userExist.id, email: userExist.email }));
-      } else {
-        dispatch(privateActions.requestHasError(true));
-      }
-    } catch (error) {
-      dispatch(privateActions.requestHasError(true));
+  authUser: currentUser => ({
+    type: actions.SIGN_IN,
+    target: 'signIn',
+    service: AuthService.getUser,
+    payload: currentUser,
+    injections: [
+      withPostSuccess((dispatch, response) => {
+        localStorage.setItem('theme', response.data.theme);
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('idUser', response.data.id);
+        document.querySelector('body').setAttribute('class', response.data.theme || 'fibre');
+      })
+    ]
+  }),
+  logout: () => ({
+    type: actions.SIGN_IN,
+    target: 'signIn',
+    service: AuthService.logout,
+    successSelector: () => {
+      localStorage.clear();
+      AuthService.setToken('');
+      document.querySelector('body').setAttribute('class', 'fibre');
+      return false;
     }
-  },
-  logout: () => async dispatch => {
-    localStorage.clear();
-    AuthService.setToken('');
-    dispatch(privateActions.userAuth(null));
-  }
+  })
 };
 
 export default actionCreators;

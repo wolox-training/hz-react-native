@@ -19,7 +19,7 @@ class Preferences extends Component {
     return (
       <Layout
         initialValues={this.props.initialValues}
-        success={this.props.success}
+        dataUpdated={this.props.dataUpdated}
         showError={this.props.hasError}
         onSubmit={this.handleSubmit}
       />
@@ -38,13 +38,13 @@ Preferences.propTypes = {
   }),
   loadUserData: PropTypes.func.isRequired,
   updateUser: PropTypes.func,
-  success: PropTypes.bool
+  dataUpdated: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  initialValues: state.preferences.data,
-  hasError: state.preferences.hasError,
-  success: state.preferences.success
+  initialValues: state.preferences.userData,
+  hasError: state.preferences.userDataError,
+  dataUpdated: state.preferences.userDataUpdated
 });
 
 const mapDispatchToProps = dispatch => ({

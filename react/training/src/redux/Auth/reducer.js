@@ -1,18 +1,12 @@
-const defaultState = {
-  auth: undefined,
-  loading: false,
-  hasError: false
+import { createReducer, completeReducer, completeState } from 'redux-recompose';
+import Immutable from 'seamless-immutable';
+
+import { actions } from './action';
+
+const initialState = completeState({ signIn: null });
+
+const reducerDescription = {
+  primaryActions: [actions.SIGN_IN]
 };
 
-export function reducer(state = defaultState, action) {
-  switch (action.type) {
-    case 'SIGN_IN_SUCCESS':
-      return { ...state, auth: action.auth };
-    case 'SIGN_IN_LOADING':
-      return { ...state, loading: action.loading };
-    case 'SIGN_IN_FAILURE':
-      return { ...state, hasError: action.hasError };
-    default:
-      return state;
-  }
-}
+export default createReducer(Immutable(initialState), completeReducer(reducerDescription));

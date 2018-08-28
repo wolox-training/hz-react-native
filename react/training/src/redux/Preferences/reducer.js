@@ -1,18 +1,15 @@
-const defaultState = {
-  data: {},
-  hasError: false,
-  success: false
+import { createReducer, onReadValue, completeReducer, completeState } from 'redux-recompose';
+import Immutable from 'seamless-immutable';
+
+import { actions } from './action';
+
+const initialState = completeState({ userData: null, userDataUpdated: null }, ['userDataUpdated']);
+
+const reducerDescription = {
+  primaryActions: [actions.FETCH_USER_DATA, actions.UPDATE_USER_DATA],
+  override: {
+    [actions.USER_DATA_UPDATED]: onReadValue()
+  }
 };
 
-export function reducer(state = defaultState, action) {
-  switch (action.type) {
-    case 'LOAD_USER_DATA':
-      return { ...state, data: action.data };
-    case 'GET_USER_FAILURE':
-      return { ...state, hasError: action.hasError };
-    case 'UPDATE_USER_SUCCESS':
-      return { ...state, success: action.success };
-    default:
-      return state;
-  }
-}
+export default createReducer(Immutable(initialState), completeReducer(reducerDescription));

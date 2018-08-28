@@ -27,8 +27,8 @@ Login.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  loading: state.auth.loading,
-  hasError: state.auth.hasError
+  loading: state.auth.signInLoading,
+  hasError: state.auth.signInError
 });
 
 const mapDispatchToProps = dispatch => ({
