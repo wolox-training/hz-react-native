@@ -1,4 +1,4 @@
-import { completeTypes, createTypes, withPostSuccess } from 'redux-recompose';
+import { completeTypes, createTypes, withPostSuccess, withPrefetch } from 'redux-recompose';
 
 import AuthService from '~services/AuthService';
 
@@ -23,12 +23,15 @@ const actionCreators = {
     type: actions.SIGN_IN,
     target: 'signIn',
     service: AuthService.logout,
-    successSelector: () => {
-      localStorage.clear();
-      AuthService.setToken('');
-      document.querySelector('body').setAttribute('class', 'fibre');
-      return false;
-    }
+    injections: [
+      withPrefetch(() => {
+        localStorage.clear();
+      }),
+      withPostSuccess(() => {
+        AuthService.setToken('');
+        document.querySelector('body').setAttribute('class', 'fibre');
+      })
+    ]
   })
 };
 
