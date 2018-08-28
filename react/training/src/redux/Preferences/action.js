@@ -28,13 +28,12 @@ const actionCreators = {
     target: 'userData',
     service: UserService.updateUser,
     payload: userData,
-    successSelector: ({ data }) => {
-      localStorage.setItem('theme', data.theme);
-      return data;
-    },
     injections: [
       withPrefetch(dispatch => dispatch(privateActions.dataUpdated(false))),
-      withPostSuccess(dispatch => dispatch(privateActions.dataUpdated(true)))
+      withPostSuccess((dispatch, response) => {
+        localStorage.setItem('theme', response.data.theme);
+        dispatch(privateActions.dataUpdated(true));
+      })
     ]
   })
 };

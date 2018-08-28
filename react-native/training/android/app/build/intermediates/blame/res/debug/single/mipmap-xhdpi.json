@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/henryzarza/Documents/hz-react-native/react-native/training/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_launcher.png",
+        "source": "/Users/henryzarza/Documents/hz-react-native/react-native/training/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/henryzarza/Documents/hz-react-native/react-native/training/android/app/build/intermediates/res/merged/debug/mipmap-xhdpi/ic_launcher_round.png",
+        "source": "/Users/henryzarza/Documents/hz-react-native/react-native/training/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
+    }
+]
