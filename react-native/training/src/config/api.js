@@ -1,7 +1,7 @@
 import Reactotron from 'reactotron-react-native';
 import { create } from 'apisauce';
 
-const baseURL = 'http://wolox.com';
+const baseURL = 'http://localhost:3001'; // 'http:10.0.2.2:3001'; only in Android
 
 const api = create({
   baseURL,
@@ -11,10 +11,6 @@ const api = create({
 api.addMonitor(Reactotron.apisauce);
 
 export const apiSetup = dispatch => { // eslint-disable-line no-unused-vars, prettier/prettier
-  if (baseURL === 'http://wolox.com') {
-    // console.warn('API baseURL has not been properly initialized');
-  }
-
   api.addMonitor(response => {
     if (response.status === 401) {
       // dispatch(actions.sessionExpired());

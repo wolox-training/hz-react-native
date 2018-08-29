@@ -12,13 +12,15 @@ import Navigator from '../app/screens';
 
 import auth from './auth/reducer';
 import todolist from './todolist/reducer';
+import book from './book/reducer';
 
 const nav = createNavigationReducer(Navigator);
 
 const reducers = combineReducers({
   auth,
   nav,
-  todolist
+  todolist,
+  book
 });
 
 const middlewares = [];
