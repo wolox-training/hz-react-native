@@ -14,6 +14,7 @@ import Login from './screens/Login';
 import Home from './screens/Home';
 import TodoList from './screens/Home/screens/TodoList';
 import Book from './screens/Home/screens/Book';
+import BookDetail from './screens/Home/screens/Book/components/BookDetail';
 
 // ------------------ Initial loading screen
 // TODO: URGENT! Move this component to a separated file and use it ONLY if the project has login.
@@ -55,6 +56,11 @@ export default createStackNavigator(
     [Routes.Login]: {
       screen: Login,
       navigationOptions: screensNavOptions[Routes.Login]
+    },
+    [Routes.BookDetail]: {
+      screen: BookDetail,
+      path: `${Routes.BookDetail}/:title`,
+      navigationOptions: screensNavOptions[Routes.BookDetail]
     },
     [Routes.Home]: {
       screen: createBottomTabNavigator(

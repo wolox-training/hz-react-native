@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import BookActions from '../../../../../redux/book/actions';
+import Routes from '../../../../../constants/routes';
 
 import ItemBook from './components/ItemBook';
 
@@ -13,12 +14,20 @@ class Book extends Component {
     getBooks();
   }
 
+  gotoDetail = data => {
+    const { navigation } = this.props;
+    navigation.navigate(Routes.BookDetail, {
+      title: data.title,
+      data
+    });
+  };
+
   render() {
     const { books } = this.props;
     return (
       <ScrollView>
         {books.map(item => (
-          <ItemBook key={item.id} data={item} />
+          <ItemBook key={item.id} data={item} selectBook={this.gotoDetail} />
         ))}
       </ScrollView>
     );
@@ -37,7 +46,10 @@ Book.propTypes = {
       image_url: PropTypes.string
     })
   ),
-  getBooks: PropTypes.func.isRequired
+  getBooks: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func
+  })
 };
 
 const mapStateToProps = store => ({
