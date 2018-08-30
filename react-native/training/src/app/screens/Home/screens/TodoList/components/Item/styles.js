@@ -15,21 +15,19 @@ export default StyleSheet.create({
     backgroundColor: gray
   },
   textItem: {
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 'auto'
+    flex: 1
   },
   containerOptions: {
     alignItems: 'center',
     flexDirection: 'row',
-    flexGrow: 0,
-    flexShrink: 0,
-    flexBasis: 'auto',
+    flex: 0,
     marginLeft: 5
   },
   textButton: {
     color: newYorkPink,
-    fontWeight: '600'
+    fontWeight: '600',
+    fontSize: 20,
+    marginLeft: 5
   },
   button: {
     paddingVertical: 0,

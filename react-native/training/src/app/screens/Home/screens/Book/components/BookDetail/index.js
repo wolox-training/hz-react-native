@@ -34,7 +34,7 @@ function BookDetail({ navigation }) {
 
 BookDetail.propTypes = {
   navigation: PropTypes.shape({
-    getParam: PropTypes.func
+    getParam: PropTypes.func.isRequired
   })
 };
 

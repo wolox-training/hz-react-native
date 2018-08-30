@@ -3,7 +3,7 @@ import { create } from 'apisauce';
 
 import { isAndroid } from '../constants/platform';
 
-const baseURL = isAndroid ? 'http:10.0.2.2:3001' : 'http://localhost:3001';
+const baseURL = isAndroid ? 'http://10.0.2.2:3001' : 'http://localhost:3001';
 
 const api = create({
   baseURL,
