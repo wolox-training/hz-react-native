@@ -12,8 +12,13 @@ import Footer from './components/Footer';
 class TodoList extends Component {
   keyExtractor = item => item.id;
 
+  renderList = ({ item }) => {
+    const { selectItem, deleteItem } = this.props;
+    return <Item key={item.id} item={item} selectItem={selectItem} deleteItem={deleteItem} />;
+  };
+
   render() {
-    const { items, addItem, selectItem, deleteItem, deleteItemSelected } = this.props;
+    const { items, addItem, deleteItemSelected } = this.props;
     return (
       <View style={styles.container}>
         <CustomTextInput
@@ -25,9 +30,7 @@ class TodoList extends Component {
           style={styles.containerItems}
           data={items}
           keyExtractor={this.keyExtractor}
-          renderItem={({ item }) => (
-            <Item key={item.id} item={item} selectItem={selectItem} deleteItem={deleteItem} />
-          )}
+          renderItem={this.renderList}
         />
         <Footer deleteItemSelected={deleteItemSelected} />
       </View>
