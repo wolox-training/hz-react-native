@@ -56,7 +56,7 @@ CustomButton.propTypes = {
   iconStyle: ViewPropTypes.style,
   onPress: PropTypes.func.isRequired,
   style: ViewPropTypes.style,
-  textStyle: PropTypes.number,
+  textStyle: PropTypes.shape(),
   title: PropTypes.string
 };
 

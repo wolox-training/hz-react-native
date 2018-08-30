@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import Reactotron from 'reactotron-react-native';
 import thunk from 'redux-thunk';
-import { 
+import {
   createReactNavigationReduxMiddleware,
   createNavigationReducer
 } from 'react-navigation-redux-helpers';
@@ -11,12 +11,14 @@ import { ROOT } from '../constants/platform';
 import Navigator from '../app/screens';
 
 import auth from './auth/reducer';
+import todolist from './todolist/reducer';
 
 const nav = createNavigationReducer(Navigator);
 
 const reducers = combineReducers({
   auth,
-  nav
+  nav,
+  todolist
 });
 
 const middlewares = [];
