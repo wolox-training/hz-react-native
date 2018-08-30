@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { TouchableOpacity, Image, ViewPropTypes } from 'react-native';
+import { TouchableOpacity, Image, ViewPropTypes, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 import CustomText from '../CustomText';
@@ -56,7 +56,7 @@ CustomButton.propTypes = {
   iconStyle: ViewPropTypes.style,
   onPress: PropTypes.func.isRequired,
   style: ViewPropTypes.style,
-  textStyle: PropTypes.shape(),
+  textStyle: Text.propTypes.style,
   title: PropTypes.string
 };
 
