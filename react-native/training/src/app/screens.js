@@ -70,7 +70,7 @@ export default createStackNavigator(
           [Routes.Home]: {
             screen: Home,
             navigationOptions: screensNavOptions[Routes.Home]
-         }
+          }
         },
         tabNavConfig
       ),
