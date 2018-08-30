@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 import todoListActions from '../../../../../redux/todolist/actions';
 
-import Layout from './layout';
+import TodoList from './layout';
 
-class TodoList extends Component {
+class TodoListContainer extends Component {
   addItem = value => {
     const { addItem } = this.props;
     addItem({ id: this.autoGenerateId(), value, selected: false });
@@ -35,7 +35,7 @@ class TodoList extends Component {
   render() {
     const { items } = this.props;
     return (
-      <Layout
+      <TodoList
         items={items}
         addItem={this.addItem}
         deleteItem={this.deleteItem}
@@ -46,17 +46,17 @@ class TodoList extends Component {
   }
 }
 
-TodoList.propTypes = {
-  addItem: PropTypes.func,
+TodoListContainer.propTypes = {
+  addItem: PropTypes.func.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       value: PropTypes.string
     })
   ),
-  toggleItemCompleted: PropTypes.func,
-  deleteItem: PropTypes.func,
-  deleteItemsSelected: PropTypes.func
+  toggleItemCompleted: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
+  deleteItemsSelected: PropTypes.func.isRequired
 };
 
 const mapStateToProps = store => ({
@@ -74,4 +74,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TodoList);
+)(TodoListContainer);

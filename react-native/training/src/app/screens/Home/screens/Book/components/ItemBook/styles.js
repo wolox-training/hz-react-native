@@ -20,9 +20,7 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: gray,
     justifyContent: 'center',
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 'auto',
+    flex: 1,
     paddingVertical: 10
   },
   bookTitle: {
