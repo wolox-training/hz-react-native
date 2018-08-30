@@ -67,9 +67,9 @@ export default createStackNavigator(
             screen: Book,
             navigationOptions: screensNavOptions[Routes.Book]
           },
-          [Routes.Home]: {
+          [Routes.Logout]: {
             screen: Home,
-            navigationOptions: screensNavOptions[Routes.Home]
+            navigationOptions: screensNavOptions[Routes.Logout]
           }
         },
         tabNavConfig
