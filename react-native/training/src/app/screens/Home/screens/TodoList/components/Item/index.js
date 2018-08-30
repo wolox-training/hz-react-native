@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -8,31 +8,36 @@ import CustomButton from '../../../../../../components/CustomButton';
 
 import styles from './styles';
 
-function Item({ item, selectItem, deleteItem }) {
-  const handleToggle = () => {
+class Item extends Component {
+  handleToggle = () => {
+    const { item, selectItem } = this.props;
     selectItem(item.id);
   };
 
-  const hanldeDeleteItem = () => {
+  handleDeleteItem = () => {
+    const { item, deleteItem } = this.props;
     deleteItem(item.id);
   };
 
-  return (
-    <View style={[styles.container, item.selected && styles.containerSelected]}>
-      <CustomText style={styles.textItem}> {item.value} </CustomText>
-      <View style={styles.containerOptions}>
-        <CustomCheckbox onToggle={handleToggle} isChecked={item.selected} />
-        <CustomButton
-          onPress={hanldeDeleteItem}
-          title="X"
-          transparent
-          style={styles.button}
-          textStyle={styles.textButton}
-          activeOpacity={0.6}
-        />
+  render() {
+    const { item } = this.props;
+    return (
+      <View style={[styles.container, item.selected && styles.containerSelected]}>
+        <CustomText style={styles.textItem}> {item.value} </CustomText>
+        <View style={styles.containerOptions}>
+          <CustomCheckbox onToggle={this.handleToggle} isChecked={item.selected} />
+          <CustomButton
+            onPress={this.handleDeleteItem}
+            title="X"
+            transparent
+            style={styles.button}
+            textStyle={styles.textButton}
+            activeOpacity={0.6}
+          />
+        </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
 
 Item.propTypes = {

@@ -9,7 +9,9 @@ const translations = {
     [Routes.Login]: 'Login',
     [Routes.TodoList]: 'Todo List',
     [Routes.Book]: 'Book',
-    [Routes.Home]: 'Home'
+    [Routes.Home]: 'Home',
+    footerMessage: 'Remove completed items',
+    todolistTextInput: 'Enter an item!'
   }
 };
 
