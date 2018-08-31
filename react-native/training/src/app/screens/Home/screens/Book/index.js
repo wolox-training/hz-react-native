@@ -1,17 +1,45 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { Component } from 'react';
+import { ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import CustomText from '../../../../components/CustomText';
-import { strings } from '../../../../i18n';
+import BookActions from '../../../../../redux/book/actions';
+import { propBook } from '../../../../../constants/propTypes';
 
-import styles from './styles';
+import ItemBook from './components/ItemBook';
 
-function Book() {
-  return (
-    <View style={styles.container}>
-      <CustomText>{strings.DEFAULT_TEXT()}</CustomText>
-    </View>
-  );
+class Book extends Component {
+  componentDidMount() {
+    const { getBooks } = this.props;
+    getBooks();
+  }
+
+  render() {
+    const { books } = this.props;
+    return (
+      <ScrollView>
+        {books.map(item => (
+          <ItemBook key={item.id} data={item} />
+        ))}
+      </ScrollView>
+    );
+  }
 }
 
-export default Book;
+Book.propTypes = {
+  books: PropTypes.arrayOf(PropTypes.shape(propBook)),
+  getBooks: PropTypes.func.isRequired
+};
+
+const mapStateToProps = store => ({
+  books: store.book.books
+});
+
+const mapDispatchToProps = dispatch => ({
+  getBooks: () => dispatch(BookActions.getBooks())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Book);
