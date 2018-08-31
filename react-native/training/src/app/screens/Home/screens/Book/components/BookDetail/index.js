@@ -3,15 +3,17 @@ import { ScrollView, Image, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 import CustomText from '../../../../../../components/CustomText';
-import { defaultImage } from '../../../../../../../constants/defaultValues';
 
 import styles from './styles';
 
+const defaultImage = '../../../../../../../assets/book-cover-default.jpg';
+
 function BookDetail({ navigation }) {
   const data = navigation.getParam('data');
+  const source = data.image_url ? { uri: data.image_url } : require(defaultImage);
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <Image style={styles.bookImage} source={{ uri: data.image_url || defaultImage }} />
+      <Image style={styles.bookImage} source={source} />
       <View style={styles.bookInfo}>
         <CustomText style={styles.subTitle}>Author: </CustomText>
         <CustomText>{data.author}</CustomText>

@@ -3,9 +3,11 @@ import { View, Image, TouchableHighlight } from 'react-native';
 import PropTypes from 'prop-types';
 
 import CustomText from '../../../../../../components/CustomText';
-import { defaultImage } from '../../../../../../../constants/defaultValues';
+import { propBook } from '../../../../../../../constants/propTypes';
 
 import styles from './styles';
+
+const defaultImage = '../../../../../../../assets/book-cover-default.jpg';
 
 class ItemBook extends Component {
   handleOnPress = () => {
@@ -15,10 +17,11 @@ class ItemBook extends Component {
 
   render() {
     const { data } = this.props;
+    const source = data.image_url ? { uri: data.image_url } : require(defaultImage);
     return (
       <TouchableHighlight onPress={this.handleOnPress}>
         <View style={styles.container}>
-          <Image style={styles.bookImage} source={{ uri: data.image_url || defaultImage }} />
+          <Image style={styles.bookImage} source={source} />
           <View style={styles.bookInfo}>
             <CustomText style={styles.bookTitle}>{data.title}</CustomText>
             <CustomText>{data.author}</CustomText>
@@ -30,15 +33,7 @@ class ItemBook extends Component {
 }
 
 ItemBook.propTypes = {
-  data: PropTypes.shape({
-    id: PropTypes.number,
-    author: PropTypes.string,
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    publisher: PropTypes.string,
-    year: PropTypes.string,
-    image_url: PropTypes.string
-  }),
+  data: PropTypes.shape(propBook),
   selectBook: PropTypes.func.isRequired
 };
 

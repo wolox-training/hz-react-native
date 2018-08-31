@@ -1,9 +1,10 @@
 import Reactotron from 'reactotron-react-native';
 import { create } from 'apisauce';
+import Config from 'react-native-config';
 
 import { isAndroid } from '../constants/platform';
 
-const baseURL = isAndroid ? 'http://10.0.2.2:3001' : 'http://localhost:3001';
+const baseURL = isAndroid ? Config.API_BASE_URL_ANDROID : Config.API_BASE_URL_IOS;
 
 const api = create({
   baseURL,
