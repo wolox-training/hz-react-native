@@ -3,15 +3,17 @@ import { View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 import CustomText from '../../../../../../components/CustomText';
+import { propBook } from '../../../../../../../constants/propTypes';
 
 import styles from './styles';
 
-const defaultImage = 'https://islandpress.org/sites/default/files/400px%20x%20600px-r01BookNotPictured.jpg';
+const defaultImage = '../../../../../../../assets/book-cover-default.jpg';
 
 function ItemBook({ data }) {
+  const source = data.image_url ? { uri: data.image_url } : require(defaultImage);
   return (
     <View style={styles.container}>
-      <Image style={styles.bookImage} source={{ uri: data.image_url || defaultImage }} />
+      <Image style={styles.bookImage} source={source} />
       <View style={styles.bookInfo}>
         <CustomText style={styles.bookTitle}>{data.title}</CustomText>
         <CustomText>{data.author}</CustomText>
@@ -21,15 +23,7 @@ function ItemBook({ data }) {
 }
 
 ItemBook.propTypes = {
-  data: PropTypes.shape({
-    id: PropTypes.number,
-    author: PropTypes.string,
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    publisher: PropTypes.string,
-    year: PropTypes.string,
-    image_url: PropTypes.string
-  })
+  data: PropTypes.shape(propBook)
 };
 
 export default ItemBook;

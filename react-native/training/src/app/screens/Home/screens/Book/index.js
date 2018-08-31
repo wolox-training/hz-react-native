@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import BookActions from '../../../../../redux/book/actions';
+import { propBook } from '../../../../../constants/propTypes';
 
 import ItemBook from './components/ItemBook';
 
@@ -26,17 +27,7 @@ class Book extends Component {
 }
 
 Book.propTypes = {
-  books: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      author: PropTypes.string,
-      title: PropTypes.string,
-      genre: PropTypes.string,
-      publisher: PropTypes.string,
-      year: PropTypes.string,
-      image_url: PropTypes.string
-    })
-  ),
+  books: PropTypes.arrayOf(PropTypes.shape(propBook)),
   getBooks: PropTypes.func.isRequired
 };
 
