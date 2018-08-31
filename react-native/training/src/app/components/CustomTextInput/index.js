@@ -105,7 +105,7 @@ CustomTextInput.propTypes = {
   textStyles: Text.propTypes.style,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
-  onSubmitEditing: PropTypes.func,
+  onSubmitEditing: PropTypes.func.isRequired,
   onFocus: PropTypes.func,
   value: PropTypes.string,
   placeholderTextColor: PropTypes.string,

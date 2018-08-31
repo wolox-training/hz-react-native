@@ -2,4 +2,5 @@ exports.InitialLoading = 'InitialLoading';
 exports.Login = 'Login';
 exports.Home = 'Home';
 exports.TodoList = 'TodoList';
-exports.Tab2 = 'Tab2';
+exports.Logout = 'Logout';
+exports.Book = 'Books';

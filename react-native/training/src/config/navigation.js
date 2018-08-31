@@ -1,5 +1,5 @@
 import * as Routes from '../constants/routes';
-import { blue, white } from '../constants/colors';
+import { white, green } from '../constants/colors';
 
 import I18n from './i18n';
 
@@ -10,7 +10,7 @@ const defaultNavOptions = ({ navigation }) => ({
 
   // TODO: The following options are examples. Change them to your need
   headerStyle: {
-    backgroundColor: blue
+    backgroundColor: green
   },
   headerBackTitleStyle: {
     color: white
@@ -29,6 +29,9 @@ const defaultNavOptions = ({ navigation }) => ({
 export const screensNavOptions = {
   // TODO: Add here the screens nav options that changes with respect to
   // the default ones defined in defaultNavOptions, for example...
+  [Routes.Login]: {
+    header: null
+  },
   [Routes.InitialLoading]: {
     header: null,
     headerStyle: {
@@ -47,5 +50,15 @@ export const stackNavConfig = {
 export const tabNavConfig = {
   // TODO: The following options are examples. Change them to your need
   // See: https://reactnavigation.org/docs/tab-navigator.html#tabnavigatorconfig
-  tabBarPosition: 'bottom'
+  tabBarOptions: {
+    activeBackgroundColor: green,
+    activeTintColor: white,
+    tabStyle: {
+      paddingBottom: 15
+    },
+    labelStyle: {
+      fontWeight: 'bold',
+      fontSize: 13
+    }
+  }
 };
