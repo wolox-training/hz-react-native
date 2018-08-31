@@ -11,7 +11,11 @@ const translations = {
     [Routes.Book]: 'Book',
     [Routes.Home]: 'Home',
     footerMessage: 'Remove completed items',
-    todolistTextInput: 'Enter an item!'
+    todolistTextInput: 'Enter an item!',
+    author: 'Author:',
+    genere: 'Genere:',
+    publisher: 'Publisher:',
+    year: 'Year:'
   }
 };
 

@@ -59,7 +59,7 @@ export default createStackNavigator(
     },
     [Routes.BookDetail]: {
       screen: BookDetail,
-      path: `${Routes.BookDetail}/:title`,
+      path: ':title',
       navigationOptions: screensNavOptions[Routes.BookDetail]
     },
     [Routes.Home]: {
@@ -73,9 +73,9 @@ export default createStackNavigator(
             screen: Book,
             navigationOptions: screensNavOptions[Routes.Book]
           },
-          [Routes.Home]: {
+          [Routes.Logout]: {
             screen: Home,
-            navigationOptions: screensNavOptions[Routes.Home]
+            navigationOptions: screensNavOptions[Routes.Logout]
           }
         },
         tabNavConfig
