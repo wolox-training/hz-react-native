@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { FlatList, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import BookActions from '../../../../../redux/book/actions';
+import Routes from '../../../../../constants/routes';
 import { propBook } from '../../../../../constants/propTypes';
 
 import ItemBook from './components/ItemBook';
@@ -14,21 +15,30 @@ class Book extends Component {
     getBooks();
   }
 
+  gotoDetail = data => {
+    const { navigation } = this.props;
+    navigation.navigate(Routes.BookDetail, {
+      title: data.title,
+      data
+    });
+  };
+
+  keyExtractor = item => `${item.id}`;
+
+  renderList = ({ item }) => <ItemBook key={item.id} data={item} selectBook={this.gotoDetail} />;
+
   render() {
     const { books } = this.props;
-    return (
-      <ScrollView>
-        {books.map(item => (
-          <ItemBook key={item.id} data={item} />
-        ))}
-      </ScrollView>
-    );
+    return <FlatList data={books} keyExtractor={this.keyExtractor} renderItem={this.renderList} />;
   }
 }
 
 Book.propTypes = {
   books: PropTypes.arrayOf(PropTypes.shape(propBook)),
-  getBooks: PropTypes.func.isRequired
+  getBooks: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func
+  })
 };
 
 const mapStateToProps = store => ({

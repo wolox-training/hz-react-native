@@ -38,7 +38,10 @@ export const screensNavOptions = {
       elevation: 0,
       shadowOpacity: 0
     }
-  }
+  },
+  [Routes.BookDetail]: ({ navigation }) => ({
+    title: `${navigation.state.params.title}`
+  })
 };
 
 export const stackNavConfig = {
