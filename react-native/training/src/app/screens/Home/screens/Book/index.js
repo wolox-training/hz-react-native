@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { FlatList, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -23,15 +23,13 @@ class Book extends Component {
     });
   };
 
+  keyExtractor = item => `${item.id}`;
+
+  renderList = ({ item }) => <ItemBook key={item.id} data={item} selectBook={this.gotoDetail} />;
+
   render() {
     const { books } = this.props;
-    return (
-      <ScrollView>
-        {books.map(item => (
-          <ItemBook key={item.id} data={item} selectBook={this.gotoDetail} />
-        ))}
-      </ScrollView>
-    );
+    return <FlatList data={books} keyExtractor={this.keyExtractor} renderItem={this.renderList} />;
   }
 }
 

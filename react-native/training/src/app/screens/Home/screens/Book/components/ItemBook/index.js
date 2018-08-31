@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 
 import CustomText from '../../../../../../components/CustomText';
 import { propBook } from '../../../../../../../constants/propTypes';
+import defaultImage from '../../../../../../../assets/book-cover-default.jpg';
 
 import styles from './styles';
-
-const defaultImage = '../../../../../../../assets/book-cover-default.jpg';
 
 class ItemBook extends Component {
   handleOnPress = () => {
@@ -17,7 +16,7 @@ class ItemBook extends Component {
 
   render() {
     const { data } = this.props;
-    const source = data.image_url ? { uri: data.image_url } : require(defaultImage);
+    const source = data.image_url ? { uri: data.image_url } : defaultImage;
     return (
       <TouchableHighlight onPress={this.handleOnPress}>
         <View style={styles.container}>

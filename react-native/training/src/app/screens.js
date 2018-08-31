@@ -59,7 +59,7 @@ export default createStackNavigator(
     },
     [Routes.BookDetail]: {
       screen: BookDetail,
-      path: `${Routes.BookDetail}/:title`,
+      path: ':title',
       navigationOptions: screensNavOptions[Routes.BookDetail]
     },
     [Routes.Home]: {
